@@ -40,7 +40,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="index.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span>
                 </a>
@@ -128,7 +128,7 @@
                     </button>
 
                     <!-- Topbar Search -->
-                    <h2>Inventori BPJS Ketenagakerjaan</h2>
+                    <h4>Sistem Inventori BPJS</h4> 
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
