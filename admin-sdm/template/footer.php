@@ -52,6 +52,16 @@
 <!-- Custom scripts for all pages-->
 <script src="../assets/js/sb-admin-2.min.js"></script>
 
-</body>
+<!-- Page level plugins -->
+<script src="../assets/vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="../assets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+<script src="../assets/vendor/izitoast/js/iziToast.min.js"></script>
 
+<script>
+    $(document).ready(function() {
+        $('#dataTable').DataTable();
+    });
+</script>
+
+</body>
 </html>

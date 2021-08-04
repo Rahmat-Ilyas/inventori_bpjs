@@ -28,6 +28,8 @@ $adm = mysqli_fetch_assoc($admin);
 
     <!-- Custom styles for this template-->
     <link href="../assets/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="../assets/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link href="../assets/vendor/izitoast/css/iziToast.min.css" rel="stylesheet">
 
 </head>
 
@@ -65,12 +67,12 @@ $adm = mysqli_fetch_assoc($admin);
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-cog"></i>
+                    <i class="fas fa-fw fa-box"></i>
                     <span>Inventori Barang</span>
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" id="kelola-barang" href="buttons.html">Kelola Barang</a>
+                        <a class="collapse-item" id="kelola-barang" href="kelola-barang.php">Kelola Barang</a>
                         <a class="collapse-item" id="tesss" href="cards.html">Barang Masuk</a>
                         <a class="collapse-item" id="tesss" href="cards.html">Barang Keluar</a>
                     </div>
@@ -80,18 +82,18 @@ $adm = mysqli_fetch_assoc($admin);
             <!-- Nav Item - Charts -->
             <li class="nav-item">
                 <a class="nav-link" id="tesss" href="charts.html">
-                    <i class="fas fa-fw fa-chart-area"></i><span>Permintaan Barang</span>
+                    <i class="fas fa-fw fa-archive"></i><span>Permintaan Barang</span>
                 </a>
             </li>
 
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i><span>Master Data</span>
+                    <i class="fas fa-fw fa-database"></i><span>Master Data</span>
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" id="tesss" href="utilities-color.html">Kategori Barang</a>
+                        <a class="collapse-item" id="kategori-barang" href="kategori-barang.php">Kategori Barang</a>
                         <a class="collapse-item" id="tesss" href="utilities-border.html">Data Supplier</a>
                         <a class="collapse-item" id="tesss" href="utilities-border.html">Data Pegawai</a>
                     </div>
@@ -101,7 +103,7 @@ $adm = mysqli_fetch_assoc($admin);
             <!-- Nav Item - Tables -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#laporan" aria-expanded="true" aria-controls="laporan">
-                    <i class="fas fa-fw fa-wrench"></i><span>Laporan</span>
+                    <i class="fas fa-fw fa-file"></i><span>Laporan</span>
                 </a>
                 <div id="laporan" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
