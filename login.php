@@ -1,3 +1,45 @@
+<?php 
+require('config.php');
+
+if (isset($_SESSION['login_adminsdm'])) header("location: admin-sdm/");
+if (isset($_SESSION['login_pegawai'])) header("location: pegawai/");
+
+$password = null;
+$username = null;
+$err_user = false;
+$err_pass = false;
+
+if (isset($_POST['login'])) {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    $admin_sdm = mysqli_query($conn, "SELECT * FROM admin_sdm WHERE username = '$username'");
+    $get = mysqli_fetch_assoc($admin_sdm);
+
+    if ($get) {
+        $get_password = $get['password'];
+        if (password_verify($password, $get_password)) {
+            $_SESSION['login_adminsdm'] = $get_password;
+            header("location: admin-sdm/");
+            exit();
+        } else $err_pass = true;
+    } else {
+        $pegawai = mysqli_query($conn, "SELECT * FROM pegawai WHERE nip = '$username'");
+        $get = mysqli_fetch_assoc($pegawai);
+        if ($get) {
+            $get_password = $get['password'];
+            $get_id = $get['id'];
+            if (password_verify($password, $get_password)) {
+                $_SESSION['login_pegawai'] = $get_password;
+                $_SESSION['pegawai_id'] = $get_id;
+                header("location: pegawai/");
+                exit();
+            } else $err_pass = true;
+        } else $err_user = true;
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,14 +84,20 @@
                                         <h1 class="h4 text-gray-900 mb-2"><b>LOGIN</b></h1>
                                         <img src="assets/img/logo.png" height="40" class="mb-4">
                                     </div>
-                                    <form class="user">
+                                    <form class="user" method="POST">
                                         <div class="form-group">
-                                            <input type="text" class="form-control form-control-user" placeholder="Username">
+                                            <input type="text" class="form-control form-control-user" name="username" placeholder="Username">
+                                            <?php if ($err_user == true) { ?>
+                                                <div class="text-danger" style="font-size: 13px;">Username tidak ditemukan, periksa kembali!</div>  
+                                            <?php } ?>
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control form-control-user" placeholder="Password">
+                                            <input type="password" class="form-control form-control-user" name="password" placeholder="Password">
+                                            <?php if ($err_pass == true) { ?>
+                                                <div class="text-danger" style="font-size: 13px;">Password tidak sesuai</div>
+                                            <?php } ?>
                                         </div>
-                                        <button type="submit" class="btn btn-primary btn-user btn-block">Login</button>
+                                        <button type="submit" class="btn btn-primary btn-user btn-block" name="login">Login</button>
                                     </form>
                                 </div>
                             </div>

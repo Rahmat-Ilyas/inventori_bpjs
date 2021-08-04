@@ -1,3 +1,12 @@
+<?php 
+require('../config.php');
+
+if (!isset($_SESSION['login_adminsdm'])) header("location: ../login.php");
+
+$admin = mysqli_query($conn, "SELECT * FROM admin_sdm");
+$adm = mysqli_fetch_assoc($admin);
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -40,9 +49,8 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="index.php">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span>
+                <a class="nav-link" id="beranda" href="index.php">
+                    <i class="fas fa-fw fa-tachometer-alt"></i><span>Dashboard</span>
                 </a>
             </li>
 
@@ -58,48 +66,50 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-cog"></i>
-                    <span>Components</span>
+                    <span>Inventori Barang</span>
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Components:</h6>
-                        <a class="collapse-item" href="buttons.html">Buttons</a>
-                        <a class="collapse-item" href="cards.html">Cards</a>
-                    </div>
-                </div>
-            </li>
-
-            <!-- Nav Item - Utilities Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>Utilities</span>
-                </a>
-                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Utilities:</h6>
-                        <a class="collapse-item" href="utilities-color.html">Colors</a>
-                        <a class="collapse-item" href="utilities-border.html">Borders</a>
-                        <a class="collapse-item" href="utilities-animation.html">Animations</a>
-                        <a class="collapse-item" href="utilities-other.html">Other</a>
+                        <a class="collapse-item" id="kelola-barang" href="buttons.html">Kelola Barang</a>
+                        <a class="collapse-item" id="tesss" href="cards.html">Barang Masuk</a>
+                        <a class="collapse-item" id="tesss" href="cards.html">Barang Keluar</a>
                     </div>
                 </div>
             </li>
 
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="charts.html">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Charts</span>
+                <a class="nav-link" id="tesss" href="charts.html">
+                    <i class="fas fa-fw fa-chart-area"></i><span>Permintaan Barang</span>
                 </a>
+            </li>
+
+            <!-- Nav Item - Utilities Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+                    <i class="fas fa-fw fa-wrench"></i><span>Master Data</span>
+                </a>
+                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" id="tesss" href="utilities-color.html">Kategori Barang</a>
+                        <a class="collapse-item" id="tesss" href="utilities-border.html">Data Supplier</a>
+                        <a class="collapse-item" id="tesss" href="utilities-border.html">Data Pegawai</a>
+                    </div>
+                </div>
             </li>
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="tables.html">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Tables</span>
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#laporan" aria-expanded="true" aria-controls="laporan">
+                    <i class="fas fa-fw fa-wrench"></i><span>Laporan</span>
                 </a>
+                <div id="laporan" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" id="tesss" href="utilities-color.html">Data Barang</a>
+                        <a class="collapse-item" id="tesss" href="utilities-color.html">Barang Masuk</a>
+                        <a class="collapse-item" id="tesss" href="utilities-border.html">Barang Keluar</a>
+                    </div>
+                </div>
             </li>
 
             <!-- Divider -->
@@ -128,7 +138,7 @@
                     </button>
 
                     <!-- Topbar Search -->
-                    <h4>Sistem Inventori BPJS</h4>
+                    <h4>Sistem Inventori BPJS - Admin SDM</h4>
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -136,7 +146,7 @@
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Administrator</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?= $adm['nama'] ?></span>
                                 <img class="img-profile rounded-circle"
                                 src="../assets/img/undraw_profile.svg">
                             </a>

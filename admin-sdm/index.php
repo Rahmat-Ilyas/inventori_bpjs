@@ -99,3 +99,9 @@ require('template/header.php');
 <?php 
 require('template/footer.php');
 ?>
+
+<script>
+    $(document).ready(function() {
+        $('#beranda').addClass('active').parents('li').addClass('active').find('.collapse').addClass('show');
+    });
+</script>

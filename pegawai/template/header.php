@@ -1,3 +1,13 @@
+<?php 
+require('../config.php');
+
+if (!isset($_SESSION['login_pegawai'])) header("location: ../login.php");
+
+$pegawai_id = $_SESSION['pegawai_id'];
+$users = mysqli_query($conn, "SELECT * FROM pegawai WHERE id='$pegawai_id'");
+$user = mysqli_fetch_assoc($users);
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -128,7 +138,7 @@
                     </button>
 
                     <!-- Topbar Search -->
-                    <h4>Sistem Inventori BPJS</h4> 
+                    <h4>Sistem Inventori BPJS - Pegawai</h4> 
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -136,7 +146,7 @@
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Administrator</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?= $user['nama'] ?></span>
                                 <img class="img-profile rounded-circle"
                                 src="../assets/img/undraw_profile.svg">
                             </a>
