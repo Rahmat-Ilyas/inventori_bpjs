@@ -68,7 +68,7 @@ $results = mysqli_query($conn, "SELECT * FROM supplier");
                                 <td><?= $res['nama_supplier'] ?></td>
                                 <td><?= $res['alamat'] ?></td>
                                 <td><?= $res['telepon'] ?></td>
-                                <td><?= $res['keterangan'] ?></td>
+                                <td><?= $res['keterangan'] ? $res['keterangan'] : '-' ?></td>
                                 <td class="text-center">
                                     <button class="btn btn-sm btn-success" data-toggle="modal" data-target=".modal-edit<?= $res['id'] ?>"><i class="fa fa-edit"></i> Edit</button>
                                     <button class="btn btn-sm btn-danger" data-toggle="modal" data-target=".modal-delete<?= $res['id'] ?>"><i class="fa fa-trash"></i> Hapus</button>
@@ -116,7 +116,7 @@ $results = mysqli_query($conn, "SELECT * FROM supplier");
                     <div class="form-group row">
                         <label class="col-md-4">Keterangan</label>
                         <div class="col-md-8">
-                            <textarea class="form-control" rows="3" name="keterangan" required="" placeholder="Keterangan..."></textarea>
+                            <textarea class="form-control" rows="3" name="keterangan" placeholder="Keterangan..."></textarea>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -165,7 +165,7 @@ $results = mysqli_query($conn, "SELECT * FROM supplier");
                         <div class="form-group row">
                             <label class="col-md-4">Keterangan</label>
                             <div class="col-md-8">
-                                <textarea class="form-control" rows="3" name="keterangan" required="" placeholder="Keterangan..."><?= $res['keterangan'] ?></textarea>
+                                <textarea class="form-control" rows="3" name="keterangan" placeholder="Keterangan..."><?= $res['keterangan'] ?></textarea>
                             </div>
                         </div>
                         <div class="form-group row">

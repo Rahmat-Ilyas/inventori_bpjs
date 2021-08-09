@@ -73,8 +73,8 @@ $adm = mysqli_fetch_assoc($admin);
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" id="kelola-barang" href="kelola-barang.php">Kelola Barang</a>
-                        <a class="collapse-item" id="tesss" href="cards.html">Barang Masuk</a>
-                        <a class="collapse-item" id="tesss" href="cards.html">Barang Keluar</a>
+                        <a class="collapse-item" id="pembelian-barang" href="pembelian-barang.php">Pembelian Barang</a>
+                        <a class="collapse-item" id="tesss" href="cards.html">Permintaan Barang</a>
                     </div>
                 </div>
             </li>
@@ -82,7 +82,7 @@ $adm = mysqli_fetch_assoc($admin);
             <!-- Nav Item - Charts -->
             <li class="nav-item">
                 <a class="nav-link" id="tesss" href="charts.html">
-                    <i class="fas fa-fw fa-archive"></i><span>Permintaan Barang</span>
+                    <i class="fas fa-fw fa-archive"></i><span>Permintaan Barang Kosong</span>
                 </a>
             </li>
 
@@ -108,7 +108,7 @@ $adm = mysqli_fetch_assoc($admin);
                 <div id="laporan" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" id="tesss" href="utilities-color.html">Data Barang</a>
-                        <a class="collapse-item" id="tesss" href="utilities-color.html">Barang Masuk</a>
+                        <a class="collapse-item" id="tesss" href="utilities-color.html">Pembelian Barang</a>
                         <a class="collapse-item" id="tesss" href="utilities-border.html">Barang Keluar</a>
                     </div>
                 </div>

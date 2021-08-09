@@ -12,4 +12,13 @@ if (isset($_POST['cekNIP'])) {
 		echo json_encode(true);
 	}
 }
+
+// CEK NIP
+if (isset($_POST['getSatuan'])) {
+	header('Content-type: application/json');
+	$id = $_POST['id'];
+	$gets = mysqli_query($conn, "SELECT * FROM barang WHERE id='$id'");
+	$get = mysqli_fetch_assoc($gets);
+	echo json_encode($get['satuan']);
+}
 ?>
