@@ -81,8 +81,8 @@ $kategori = mysqli_query($conn, "SELECT * FROM kategori");
                                     <a href="#" class="btn btn-sm btn-info" data-toggle="modal" data-target=".modal-riwayat<?= $res['id'] ?>" data-toggle1="tooltip" data-original-title="Riwayat Barang Masuk & Keluar"><i class="fa fa-list"></i></a>
                                 </td>
                                 <td class="text-center">
-                                    <button class="btn btn-sm btn-success" data-toggle="modal" data-target=".modal-edit<?= $res['id'] ?>"><i class="fa fa-edit"></i> Edit</button>
-                                    <button class="btn btn-sm btn-danger" data-toggle="modal" data-target=".modal-delete<?= $res['id'] ?>"><i class="fa fa-trash"></i> Hapus</button>
+                                    <button class="btn btn-sm btn-success" data-toggle="modal" data-target=".modal-edit<?= $res['id'] ?>" data-toggle1="tooltip" data-original-title="Edit Data"><i class="fa fa-edit"></i></button>
+                                    <button class="btn btn-sm btn-danger" data-toggle="modal" data-target=".modal-delete<?= $res['id'] ?>" data-toggle1="tooltip" data-original-title="Hapus Data"><i class="fa fa-trash"></i></button>
                                 </td>
                             </tr>
                             <?php $no=$no+1; 
@@ -191,7 +191,9 @@ $kategori = mysqli_query($conn, "SELECT * FROM kategori");
                                         <td><?= $bm['keterangan'] ? $bm['keterangan'] : '-' ?></td>
                                     </tr>
                                     <?php $no=$no+1; 
-                                } ?>
+                                } if ($no==1) { ?>
+                                    <tr><td colspan="7" class="text-center"><i>Tidak ada data ditemukan</i></td></tr>
+                                <?php } ?>
                             </tbody>
                         </table>
                     </div>
@@ -226,7 +228,9 @@ $kategori = mysqli_query($conn, "SELECT * FROM kategori");
                                         <td><?= $bk['ket_request'] ? $bk['ket_request'] : '-' ?></td>
                                     </tr>
                                     <?php $no=$no+1; 
-                                } ?>
+                                } if ($no==1) { ?>
+                                    <tr><td colspan="7" class="text-center"><i>Tidak ada data ditemukan</i></td></tr>
+                                <?php } ?>
                             </tbody>
                         </table>
                     </div>

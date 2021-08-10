@@ -3,8 +3,33 @@ require('../config.php');
 
 if (!isset($_SESSION['login_adminsdm'])) header("location: ../login.php");
 
+
+$admin = mysqli_query($conn, "SELECT * FROM admin_sdm");
+
+// Update Akun
+if (isset($_POST['update_akun'])) {
+    $adm = mysqli_fetch_assoc($admin);
+    $id = $adm['id'];
+    $nama = $_POST['nama'];
+    $username = $_POST['username'];
+    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+    if ($_POST['password'] != '') 
+        $query_updt = "UPDATE admin_sdm SET nama='$nama', username='$username', password='$password' WHERE id='$id'";
+    else
+        $query_updt = "UPDATE admin_sdm SET nama='$nama', username='$username' WHERE id='$id'";
+
+    $updt = mysqli_query($conn, $query_updt);
+    if ($updt) $msgedtakun = 'Akun Login berhasil di update';
+}
+
 $admin = mysqli_query($conn, "SELECT * FROM admin_sdm");
 $adm = mysqli_fetch_assoc($admin);
+
+$cntbrgkleuar = mysqli_query($conn, "SELECT * FROM barang_keluar WHERE status='request'");
+$cntbrkl = mysqli_num_rows($cntbrgkleuar);
+
+$cntbrgreq = mysqli_query($conn, "SELECT * FROM permintaan_barang WHERE status='request'");
+$cntbreq = mysqli_num_rows($cntbrgreq);
 
 ?>
 <!DOCTYPE html>
@@ -68,13 +93,27 @@ $adm = mysqli_fetch_assoc($admin);
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-box"></i>
-                    <span>Inventori Barang</span>
+                    <!-- <span class="beep" style="width: 40px;"></span> -->
+                    <span>Inventori Barang
+                        <?php if ($cntbrkl>0) { ?>
+                            <label class="badge badge-danger rounded-circle">
+                                <span style="font-size: 12px;"><?= $cntbrkl ?></span>
+                            </label>
+                        <?php } ?>
+                    </span>
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" id="kelola-barang" href="kelola-barang.php">Kelola Barang</a>
                         <a class="collapse-item" id="pembelian-barang" href="pembelian-barang.php">Pembelian Barang</a>
-                        <a class="collapse-item" id="tesss" href="cards.html">Permintaan Barang</a>
+                        <a class="collapse-item" id="permintaan-barang" href="permintaan-barang.php">
+                            Permintaan Barang
+                            <?php if ($cntbrkl>0) { ?>
+                                <label class="badge badge-danger rounded-circle">
+                                    <span style="font-size: 10px;"><?= $cntbrkl ?></span>
+                                </label>
+                            <?php } ?>
+                        </a>
                     </div>
                 </div>
             </li>
@@ -82,7 +121,14 @@ $adm = mysqli_fetch_assoc($admin);
             <!-- Nav Item - Charts -->
             <li class="nav-item">
                 <a class="nav-link" id="tesss" href="charts.html">
-                    <i class="fas fa-fw fa-archive"></i><span>Permintaan Barang Kosong</span>
+                    <i class="fas fa-fw fa-archive"></i>
+                    <span>Laporan Barang Habis
+                        <?php if ($cntbreq>0) { ?>
+                            <label class="badge badge-danger rounded-circle">
+                                <span style="font-size: 12px;"><?= $cntbreq ?></span>
+                            </label>
+                        <?php } ?>
+                    </span>
                 </a>
             </li>
 
@@ -153,9 +199,9 @@ $adm = mysqli_fetch_assoc($admin);
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modal-edt-akun">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Profile
+                                    Kelola Akun
                                 </a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">

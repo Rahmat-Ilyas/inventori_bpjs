@@ -36,6 +36,7 @@ if (isset($_POST['submit_edit'])) {
 	$getbrg = mysqli_query($conn, "SELECT * FROM barang WHERE id='$barang_id'");
 	$brg = mysqli_fetch_assoc($getbrg);
 	$jumlah = $brg['jumlah'] - $jmlhmsk_old + $jumlah_masuk;
+	if ($jumlah<0) $jumlah = 0;
 	mysqli_query($conn, "UPDATE barang SET jumlah='$jumlah' WHERE id='$barang_id'");
 
 	echo "<script>location.href='pembelian-barang.php?proses=2'</script>";
@@ -50,6 +51,7 @@ if (isset($_POST['submit_delete'])) {
 	$getbrg = mysqli_query($conn, "SELECT * FROM barang WHERE id='$barang_id'");
 	$brg = mysqli_fetch_assoc($getbrg);
 	$jumlah = $brg['jumlah'] - $jmlhmsk_old;
+	if ($jumlah<0) $jumlah = 0;
 	mysqli_query($conn, "UPDATE barang SET jumlah='$jumlah' WHERE id='$barang_id'");
 
 	mysqli_query($conn, "DELETE FROM barang_masuk WHERE id='$id'");
@@ -96,8 +98,8 @@ $supplier = mysqli_query($conn, "SELECT * FROM supplier");
 					<tbody>
 						<?php $no=1; foreach ($results as $res) { 
 							$brgid = $res['barang_id'];
-							$barang = mysqli_query($conn, "SELECT * FROM barang WHERE id='$brgid'");
-							$brg = mysqli_fetch_assoc($barang);
+							$getbarang = mysqli_query($conn, "SELECT * FROM barang WHERE id='$brgid'");
+							$brg = mysqli_fetch_assoc($getbarang);
 
 							$splid = $res['supplier_id'];
 							$getsupplier = mysqli_query($conn, "SELECT * FROM supplier WHERE id='$splid'");
