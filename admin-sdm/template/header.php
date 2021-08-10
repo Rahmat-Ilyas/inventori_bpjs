@@ -54,6 +54,7 @@ $cntbreq = mysqli_num_rows($cntbrgreq);
     <!-- Custom styles for this template-->
     <link href="../assets/css/sb-admin-2.min.css" rel="stylesheet">
     <link href="../assets/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link href="../assets/vendor/datatables/buttons.bootstrap4.min.css" rel="stylesheet">
     <link href="../assets/vendor/izitoast/css/iziToast.min.css" rel="stylesheet">
 
 </head>
@@ -154,8 +155,8 @@ $cntbreq = mysqli_num_rows($cntbrgreq);
                 <div id="laporan" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" id="tesss" href="utilities-color.html">Data Barang</a>
-                        <a class="collapse-item" id="tesss" href="utilities-color.html">Pembelian Barang</a>
-                        <a class="collapse-item" id="tesss" href="utilities-border.html">Barang Keluar</a>
+                        <a class="collapse-item" id="laporan-pembelian" href="laporan-pembelian.php">Pembelian Barang</a>
+                        <a class="collapse-item" id="laporan-permintaan" href="laporan-permintaan.php">Barang Keluar</a>
                     </div>
                 </div>
             </li>

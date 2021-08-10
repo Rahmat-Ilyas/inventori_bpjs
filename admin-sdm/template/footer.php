@@ -90,12 +90,49 @@ aria-hidden="true">
 <!-- Page level plugins -->
 <script src="../assets/vendor/datatables/jquery.dataTables.min.js"></script>
 <script src="../assets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+<script src="../assets/vendor/datatables/dataTables.buttons.min.js"></script>
+<script src="../assets/vendor/datatables/buttons.bootstrap4.min.js"></script>
+<script src="../assets/vendor/datatables/buttons.html5.min.js"></script>
+<script src="../assets/vendor/datatables/jszip.min.js"></script>
+<script src="../assets/vendor/datatables/buttons.print.min.js"></script>
+<script src="../assets/vendor/datatables/pdfmake.min.js"></script>
+<script src="../assets/vendor/datatables/vfs_fonts.js"></script>
 <script src="../assets/vendor/izitoast/js/iziToast.min.js"></script>
 
 <script>
     $(document).ready(function() {
         $(document).tooltip({ selector: '[data-toggle1="tooltip"]' });
         $('#dataTable').DataTable();
+        $('#dataTablelaporan').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+            {
+                extend: "copy",
+                className: "btn-sm btn-info"
+            },
+            {
+                extend: "csv",
+                className: "btn-sm btn-info"
+            },
+            {
+                extend: "excel",
+                className: "btn-sm btn-info"
+            },
+            {
+                extend: "pdfHtml5",
+                className: "btn-sm btn-info"
+            },
+            {
+                extend: "print",
+                className: "btn-sm btn-info"
+            },
+            ],
+            responsive: true,
+            searching: false,
+            scrollY: false,
+            scrollCollapse: false,
+            paging: false,
+        });
 
         <?php if (isset($msgedtakun)) { ?>
             iziToast.success({

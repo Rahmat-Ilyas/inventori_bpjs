@@ -32,11 +32,11 @@ $supplier = mysqli_query($conn, "SELECT * FROM supplier");
 <div class="container-fluid">
 
 	<!-- Page Heading -->
-	<h1 class="h3 mb-2 text-gray-800">Kelola Data Pembelian Barang</h1>
+	<h1 class="h3 mb-2 text-gray-800">Kelola Data Permintaan Barang</h1>
 	<!-- DataTales Example -->
 	<div class="card shadow mb-4">
 		<div class="card-header py-3">
-			<h6 class="m-0 font-weight-bold text-primary"> Data Pembelian Barang</h6>
+			<h6 class="m-0 font-weight-bold text-primary"> Data Permintaan Barang</h6>
 		</div>
 		<div class="card-body">
 			<div class="table-responsive">
@@ -126,11 +126,11 @@ $supplier = mysqli_query($conn, "SELECT * FROM supplier");
 								<td><?= $res2['ket_response'] ? $res2['ket_response'] : '-' ?></td>
 								<td class="text-center">
 									<?php 
-									if ($res2['status'] == 'accept') $status = ['success', 'Disetujui'];
+									if ($res2['status'] == 'accept') $status = ['primary', 'Disetujui'];
 									else if ($res2['status'] == 'refuse') $status = ['danger', 'Ditolak'];
-									else if ($res2['status'] == 'finish') $status = ['primary', 'Selesai'];
+									else if ($res2['status'] == 'finish') $status = ['success', 'Selesai'];
 									?>
-									<b><i class="text-<?= $status[0] ?>"><?= $status[1] ?></i></b>
+									<span class="badge badge-pill badge-<?= $status[0] ?>"><?= $status[1] ?></span>
 								</td>
 							</tr>
 							<?php $no=$no+1;
