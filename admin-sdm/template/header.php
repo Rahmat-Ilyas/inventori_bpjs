@@ -154,7 +154,8 @@ $cntbreq = mysqli_num_rows($cntbrgreq);
                 </a>
                 <div id="laporan" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" id="tesss" href="utilities-color.html">Data Barang</a>
+                        <a class="collapse-item" id="tesss" href="utilities-color.html">Data Barang (Format 1)</a>
+                        <a class="collapse-item" id="tesss" href="utilities-color.html">Data Barang (Format 2)</a>
                         <a class="collapse-item" id="laporan-pembelian" href="laporan-pembelian.php">Pembelian Barang</a>
                         <a class="collapse-item" id="laporan-permintaan" href="laporan-permintaan.php">Barang Keluar</a>
                     </div>
