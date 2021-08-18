@@ -129,7 +129,7 @@ aria-hidden="true">
             ],
             responsive: true,
             searching: false,
-            scrollY: false,
+            // scrollY: false,
             scrollCollapse: false,
             paging: false,
         });

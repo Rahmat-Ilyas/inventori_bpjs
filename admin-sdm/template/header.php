@@ -41,7 +41,7 @@ $cntbreq = mysqli_num_rows($cntbrgreq);
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../assets/../assets/img/logo2.png" type="image/ico" />
+    <link rel="icon" href="../assets/img/logo2.png" type="image/ico" />
 
     <title>Inventori BPJS Ketenagakerjaan - Admin SDM</title>
 
@@ -154,8 +154,8 @@ $cntbreq = mysqli_num_rows($cntbrgreq);
                 </a>
                 <div id="laporan" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" id="tesss" href="utilities-color.html">Data Barang (Format 1)</a>
-                        <a class="collapse-item" id="tesss" href="utilities-color.html">Data Barang (Format 2)</a>
+                        <a class="collapse-item" id="laporan-opname1" href="laporan-opname1.php">Stok Opname (Format 1)</a>
+                        <a class="collapse-item" id="laporan-opname2" href="laporan-opname2.php">Stok Opname (Format 2)</a>
                         <a class="collapse-item" id="laporan-pembelian" href="laporan-pembelian.php">Pembelian Barang</a>
                         <a class="collapse-item" id="laporan-permintaan" href="laporan-permintaan.php">Barang Keluar</a>
                     </div>
