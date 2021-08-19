@@ -1,11 +1,10 @@
 <?php 
-header("Content-Type: application/vnd-ms-excel");
-header("Content-Disposition: attachment; filename=laporan-data-opname-barang-".strtolower(get_bulan(date('m', strtotime($_GET['bulan']))))."format-1.xlsx");
 require('../../config.php');
 
 if (isset($_GET['bulan'])) {
     $results = get_data(date('Y-m', strtotime($_GET['bulan'])));
-    $title = "Laporan Stok Opname Barang per Bulan ".get_bulan(date('m', strtotime($_GET['bulan'])));
+    header("Content-Type: application/vnd-ms-excel");
+    header("Content-Disposition: attachment; filename=laporan-data-opname-barang-".strtolower(get_bulan(date('m', strtotime($_GET['bulan']))))."-format-1.xlsx");
 } else {
     echo "<script>window.close();</script>";
 }
@@ -139,15 +138,15 @@ th, td {
 </style>
 
 <body>
-        <b>BPJS KETENAGAKERJAAN KANTOR CABANG MAKASSAR</b> <br>
-        <b>STOK OPNAME PERSEDIAAN PERLENGKAPAN KANTOR</b> </br>
-        <b>PER BULAN <?= strtoupper(get_bulan(date('m', strtotime($_GET['bulan'])))).' '.date('Y', strtotime($_GET['bulan'])) ?></b><br>
+    <b>BPJS KETENAGAKERJAAN KANTOR CABANG MAKASSAR</b> <br>
+    <b>STOK OPNAME PERSEDIAAN PERLENGKAPAN KANTOR</b> </br>
+    <b>PER BULAN <?= strtoupper(get_bulan(date('m', strtotime($_GET['bulan'])))).' '.date('Y', strtotime($_GET['bulan'])) ?></b><br>
 
     <table border="1">
         <thead style="text-align: center;">
             <tr>
                 <th rowspan="2">No</th>
-                <th rowspan="2" style="min-width: 200px;">Nama Barang</th>
+                <th rowspan="2" style="min-width: 200px;">Nama Barang&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                 <th colspan="3">Stok Opname Per Bulan  <?= $results['header']['bulan_old'] ?></th>
                 <th colspan="3">Barang Masuk Selama Bulan <?= $results['header']['bulan_now'] ?></th>
                 <th colspan="3">Barang Keluar Selama Bulan <?= $results['header']['bulan_now'] ?></th>
@@ -156,19 +155,19 @@ th, td {
             </tr>
             <tr>
                 <th>Jumlah</th>
-                <th style="min-width: 120px;">Harga Rata-rata</th>
+                <th style="min-width: 120px;">Harga Rata-rata&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                 <th>Nominal</th>
 
                 <th>Jumlah</th>
-                <th style="min-width: 120px;">Harga Rata-rata</th>
+                <th style="min-width: 120px;">Harga Rata-rata&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                 <th>Nominal</th>
 
                 <th>Jumlah</th>
-                <th style="min-width: 120px;">Harga Rata-rata</th>
+                <th style="min-width: 120px;">Harga Rata-rata&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                 <th>Nominal</th>
 
                 <th>Jumlah</th>
-                <th style="min-width: 120px;">Harga Rata-rata</th>
+                <th style="min-width: 120px;">Harga Rata-rata&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                 <th>Nominal</th>
 
             </tr>
@@ -176,7 +175,7 @@ th, td {
         <tbody>
             <?php $no=1; foreach ($results['kategori'] as $kat) {?>
                 <tr>
-                    <td colspan="2"><?= $kat['nama_kategori'] ?></td>
+                    <td colspan="2"><b><?= strtoupper($kat['nama_kategori']) ?></b></td>
                     <td></td><td></td><td></td><td></td><td></td><td></td><td>
                     </td><td></td><td></td><td></td><td></td><td></td><td></td>
                 </tr>

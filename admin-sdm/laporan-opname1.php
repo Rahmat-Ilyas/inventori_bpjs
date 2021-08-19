@@ -225,7 +225,7 @@ function get_bulan($bln) {
 
     <script>
         $(document).ready(function() {
-            $('#laporan-format1').addClass('active').parents('li').addClass('active').find('.collapse').addClass('show');
+            $('#laporan-opname1').addClass('active').parents('li').addClass('active').find('.collapse').addClass('show');
             $('title').html('<?= $title ?>');
             $('#bulan-val').val("<?= $_POST ? $_POST['bulan'] : date('Y-m') ?>"); 
         });
