@@ -48,9 +48,17 @@
 
 <!-- Core plugin JavaScript-->
 <script src="../assets/vendor/jquery-easing/jquery.easing.min.js"></script>
+<script src="../assets/vendor/select/select2.min.js"></script>
+<script src="../assets/vendor/select/bootstrap-select.min.js"></script>
 
 <!-- Custom scripts for all pages-->
 <script src="../assets/js/sb-admin-2.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('.select2').selectpicker();
+    });
+</script>
 
 </body>
 
