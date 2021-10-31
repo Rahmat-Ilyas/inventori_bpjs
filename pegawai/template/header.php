@@ -5,7 +5,27 @@ if (!isset($_SESSION['login_pegawai'])) header("location: ../login.php");
 
 $pegawai_id = $_SESSION['pegawai_id'];
 $users = mysqli_query($conn, "SELECT * FROM pegawai WHERE id='$pegawai_id'");
+
+// Update Akun
+if (isset($_POST['update_akun'])) {
+    $user = mysqli_fetch_assoc($users);
+    $id = $user['id'];
+    $nama = $_POST['nama'];
+    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+    if ($_POST['password'] != '') 
+        $query_updt = "UPDATE pegawai SET nama='$nama', password='$password' WHERE id='$id'";
+    else
+        $query_updt = "UPDATE pegawai SET nama='$nama' WHERE id='$id'";
+
+    $updt = mysqli_query($conn, $query_updt);
+    if ($updt) $msgedtakun = 'Akun Login berhasil di update';
+}
+
+$users = mysqli_query($conn, "SELECT * FROM pegawai WHERE id='$pegawai_id'");
 $user = mysqli_fetch_assoc($users);
+
+$cntbrgkleuar = mysqli_query($conn, "SELECT * FROM barang_keluar WHERE (status='request' OR status='accept') AND pegawai_id='$pegawai_id'");
+$cntbrkl = mysqli_num_rows($cntbrgkleuar);
 
 ?>
 <!DOCTYPE html>
@@ -31,6 +51,9 @@ $user = mysqli_fetch_assoc($users);
 
     <!-- Custom styles for this template-->
     <link href="../assets/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="../assets/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link href="../assets/vendor/datatables/buttons.bootstrap4.min.css" rel="stylesheet">
+    <link href="../assets/vendor/izitoast/css/iziToast.min.css" rel="stylesheet">
 
 </head>
 
@@ -74,27 +97,33 @@ $user = mysqli_fetch_assoc($users);
             </li>
 
             <li class="nav-item">
-                <a class="nav-link collapsed">
+                <a href="permintaan-saya.php" class="nav-link collapsed" id="permintaan-saya">
                     <i class="fas fa-fw fa-shopping-basket"></i>
-                    <span>Permintaan Saya</span>
+                    <span>Permintaan Saya
+                        <?php if ($cntbrkl>0) { ?>
+                            <label class="badge badge-danger rounded-circle">
+                                <span style="font-size: 12px;"><?= $cntbrkl ?></span>
+                            </label>
+                        <?php } ?>
+                    </span>
                 </a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link collapsed">
+                <a href="riwayat.php" class="nav-link collapsed" id="riwayat">
                     <i class="fas fa-fw fa-history"></i>
                     <span>Riwayat Permintaan</span>
                 </a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#">
+                <a href="barang-habis.php" class="nav-link collapsed" id="barang-habis">
                     <i class="fas fa-fw fa-archive"></i>
                     <span>Lapor Barang Habis</span>
                 </a>
             </li>
 
-             <!-- Divider -->
+            <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 
             <!-- Heading -->
@@ -104,7 +133,7 @@ $user = mysqli_fetch_assoc($users);
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="tables.html">
+                <a href="profil.php" class="nav-link" id="profil">
                     <i class="fas fa-fw fa-user"></i>
                     <span>Profil Saya</span>
                 </a>
@@ -150,7 +179,7 @@ $user = mysqli_fetch_assoc($users);
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modal-edt-akun">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Pengaturan Akun
                                 </a>

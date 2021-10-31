@@ -371,7 +371,7 @@ require('template/footer.php');
 				method  : "POST",
 				data    : { getSatuan: true, id: id },
 				success : function(data) {
-					$('.satuan').val(data).text(data);
+					$('.satuan').val(data.satuan).text(data.satuan);
 				}
 			});
 		});

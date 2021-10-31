@@ -19,6 +19,6 @@ if (isset($_POST['getSatuan'])) {
 	$id = $_POST['id'];
 	$gets = mysqli_query($conn, "SELECT * FROM barang WHERE id='$id'");
 	$get = mysqli_fetch_assoc($gets);
-	echo json_encode($get['satuan']);
+	echo json_encode($get);
 }
 ?>
