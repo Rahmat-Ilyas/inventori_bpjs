@@ -33,7 +33,7 @@ CREATE TABLE `admin_sdm` (
   `nama` varchar(255) NOT NULL,
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `admin_sdm`
@@ -55,7 +55,7 @@ CREATE TABLE `barang` (
   `jumlah` int NOT NULL,
   `satuan` varchar(255) NOT NULL,
   `keterangan` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `barang`
@@ -81,7 +81,7 @@ CREATE TABLE `barang_keluar` (
   `ket_request` varchar(255) DEFAULT NULL,
   `ket_response` varchar(255) DEFAULT NULL,
   `status` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `barang_keluar`
@@ -107,7 +107,7 @@ CREATE TABLE `barang_masuk` (
   `harga` double NOT NULL,
   `tanggal_masuk` datetime NOT NULL,
   `keterangan` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `barang_masuk`
@@ -130,7 +130,7 @@ CREATE TABLE `kategori` (
   `id` int NOT NULL,
   `nama_kategori` varchar(255) NOT NULL,
   `keterangan` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `kategori`
@@ -156,7 +156,7 @@ CREATE TABLE `pegawai` (
   `jabatan` varchar(255) NOT NULL,
   `foto` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `pegawai`
@@ -181,7 +181,7 @@ CREATE TABLE `permintaan_barang` (
   `tanggal_pesan` datetime NOT NULL,
   `keterangan` varchar(255) NOT NULL,
   `status` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `permintaan_barang`
@@ -203,7 +203,7 @@ CREATE TABLE `supplier` (
   `alamat` varchar(255) NOT NULL,
   `telepon` varchar(15) NOT NULL,
   `keterangan` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `supplier`
