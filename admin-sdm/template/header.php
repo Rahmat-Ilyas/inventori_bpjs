@@ -121,7 +121,7 @@ $cntbreq = mysqli_num_rows($cntbrgreq);
 
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" id="tesss" href="charts.html">
+                <a href="barang-habis.php" class="nav-link" id="barang-habis">
                     <i class="fas fa-fw fa-archive"></i>
                     <span>Laporan Barang Habis
                         <?php if ($cntbreq>0) { ?>

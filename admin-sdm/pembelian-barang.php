@@ -17,6 +17,9 @@ if (isset($_POST['submit_add'])) {
 	$jumlah = $brg['jumlah'] + $jumlah_masuk;
 	mysqli_query($conn, "UPDATE barang SET jumlah='$jumlah' WHERE id='$barang_id'");
 
+	// Update Laporan Permintaan
+    mysqli_query($conn, "UPDATE permintaan_barang SET status='finish' WHERE barang_id='$barang_id'");    
+
 	echo "<script>location.href='pembelian-barang.php?proses=1'</script>";
 }
 
