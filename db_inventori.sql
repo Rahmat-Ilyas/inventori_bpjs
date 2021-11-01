@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Waktu pembuatan: 10 Agu 2021 pada 21.40
--- Versi server: 8.0.25-0ubuntu0.20.04.1
+-- Waktu pembuatan: 01 Nov 2021 pada 11.56
+-- Versi server: 8.0.27-0ubuntu0.20.04.1
 -- Versi PHP: 7.4.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -62,8 +62,9 @@ CREATE TABLE `barang` (
 --
 
 INSERT INTO `barang` (`id`, `kategori_id`, `nama_barang`, `jumlah`, `satuan`, `keterangan`) VALUES
-(1, 2, 'Komputer', 8, 'Unit', 'Digunakan untuk karyawan tetap'),
-(3, 18, 'Kertas HVS', 10, 'Pcs', 'Untuk kebutuhan administrasi');
+(1, 2, 'Komputer', 3, 'Unit', 'Digunakan untuk karyawan tetap'),
+(3, 18, 'Kertas HVS', 20, 'Pcs', 'Untuk kebutuhan administrasi'),
+(4, 2, 'TV LED', 2, 'Unit', '');
 
 -- --------------------------------------------------------
 
@@ -77,8 +78,8 @@ CREATE TABLE `barang_keluar` (
   `pegawai_id` int NOT NULL,
   `jumlah_keluar` int NOT NULL,
   `tanggal_keluar` datetime NOT NULL,
-  `ket_request` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `ket_response` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `ket_request` varchar(255) DEFAULT NULL,
+  `ket_response` varchar(255) DEFAULT NULL,
   `status` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -87,8 +88,10 @@ CREATE TABLE `barang_keluar` (
 --
 
 INSERT INTO `barang_keluar` (`id`, `barang_id`, `pegawai_id`, `jumlah_keluar`, `tanggal_keluar`, `ket_request`, `ket_response`, `status`) VALUES
-(1, 1, 1, 1, '2021-08-09 22:07:52', 'Kebutuhan urgent', 'Sipp, disegerakan bos', 'accept'),
-(2, 1, 2, 1, '2021-08-09 22:07:52', 'Kebutuhan administrasi', NULL, 'finish');
+(1, 1, 1, 1, '2021-08-09 22:07:52', 'Kebutuhan urgent', 'Sipp, disegerakan bos', 'finish'),
+(2, 1, 2, 1, '2021-08-09 22:07:52', 'Kebutuhan administrasi', '', 'accept'),
+(3, 1, 1, 4, '2021-10-31 19:25:53', 'yu', 'oke', 'finish'),
+(4, 3, 1, 3, '2021-10-31 21:43:42', 'Mau pake print laporan', 'baru baruko sudah ambil bang', 'refuse');
 
 -- --------------------------------------------------------
 
@@ -113,7 +116,9 @@ CREATE TABLE `barang_masuk` (
 INSERT INTO `barang_masuk` (`id`, `barang_id`, `supplier_id`, `jumlah_masuk`, `harga`, `tanggal_masuk`, `keterangan`) VALUES
 (2, 1, 1, 5, 5890000, '2021-08-09 00:00:00', ''),
 (3, 1, 999, 3, 5850000, '2021-08-09 00:00:00', ''),
-(5, 3, 999, 10, 68000, '2021-08-10 00:00:00', '');
+(5, 3, 999, 10, 68000, '2021-08-10 00:00:00', ''),
+(6, 3, 1, 10, 200000, '2021-11-01 00:00:00', 'Selesai'),
+(7, 4, 1, 2, 12000000, '2021-11-01 00:00:00', 'Untuk keperluan monitoring');
 
 -- --------------------------------------------------------
 
@@ -147,7 +152,7 @@ CREATE TABLE `pegawai` (
   `nip` varchar(255) NOT NULL,
   `nama` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `telepon` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `telepon` varchar(255) NOT NULL,
   `jabatan` varchar(255) NOT NULL,
   `foto` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL
@@ -158,7 +163,7 @@ CREATE TABLE `pegawai` (
 --
 
 INSERT INTO `pegawai` (`id`, `nip`, `nama`, `email`, `telepon`, `jabatan`, `foto`, `password`) VALUES
-(1, '214087', 'Muhammad Ilham', 'ilham.muhammads@gmail.com', '085243675302', 'Direktur', 'default.jpg', '$2y$10$fxh4nj5F1EvvpHaw5zKTqePrQT1/HnO9WpYZtmuQBpeSWucrZVaUC'),
+(1, '214087', 'Muhammad Ilham', 'ilham.muhammad@gmail.com', '085243675302', 'Direktur', 'foto-pegawai-0001.jpg', '$2y$10$fxh4nj5F1EvvpHaw5zKTqePrQT1/HnO9WpYZtmuQBpeSWucrZVaUC'),
 (2, '214088', 'Rahmat Ilyas', 'rahmat.ilyas142@gmail.com', '08533331194', 'Direktur Utama', 'default.jpg', '$2y$10$fxh4nj5F1EvvpHaw5zKTqePrQT1/HnO9WpYZtmuQBpeSWucrZVaUC'),
 (3, '9485776', 'Yudi Kurnia S', 'yudikurnia@gmail.com', '082532032121', 'Manajer', 'default.jpg', '$2y$10$9629Grgv0Y6XcaDN1Aqn9OBFafrGh0CDl2eI362kzf./CBZIg7z/i');
 
@@ -183,7 +188,8 @@ CREATE TABLE `permintaan_barang` (
 --
 
 INSERT INTO `permintaan_barang` (`id`, `barang_id`, `pegawai_id`, `jumlah_pesan`, `tanggal_pesan`, `keterangan`, `status`) VALUES
-(1, 2, 3, 10, '2021-08-10 18:40:58', 'Kosong digudang', 'request');
+(1, 3, 3, 10, '2021-08-10 18:40:58', 'Kosong digudang', 'finish'),
+(2, 4, 1, 1, '2021-11-01 00:11:46', 'Habis di gudang min, lagi butuh ini', 'finish');
 
 -- --------------------------------------------------------
 
@@ -273,19 +279,19 @@ ALTER TABLE `admin_sdm`
 -- AUTO_INCREMENT untuk tabel `barang`
 --
 ALTER TABLE `barang`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT untuk tabel `barang_keluar`
 --
 ALTER TABLE `barang_keluar`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT untuk tabel `barang_masuk`
 --
 ALTER TABLE `barang_masuk`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT untuk tabel `kategori`
@@ -303,7 +309,7 @@ ALTER TABLE `pegawai`
 -- AUTO_INCREMENT untuk tabel `permintaan_barang`
 --
 ALTER TABLE `permintaan_barang`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT untuk tabel `supplier`
