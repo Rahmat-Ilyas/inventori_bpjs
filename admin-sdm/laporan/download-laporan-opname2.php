@@ -108,8 +108,8 @@ th, td {
             <tr>
                 <th>No</th>
                 <th style="min-width: 200px;">Nama Barang</th>
-                <th><b>Jumlah Keluar</b></th>
                 <th><b>Jumlah Masuk</b></th>
+                <th><b>Jumlah Keluar</b></th>
                 <th>Keterangan</th>
             </tr>
         </thead>

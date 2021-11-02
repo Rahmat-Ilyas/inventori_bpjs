@@ -52,7 +52,7 @@ function get_data($bulan) {
             }
 
             // barng keluar
-            $barang_keluar = mysqli_query($conn, "SELECT * FROM barang_keluar WHERE barang_id='$brgid'");
+            $barang_keluar = mysqli_query($conn, "SELECT * FROM barang_keluar WHERE barang_id='$brgid' AND status='finish'");
             foreach ($barang_keluar as $bk) {
                 $bln_keluar = date('Y-m', strtotime($bk['tanggal_keluar']));
                 $bln_old = date('Y-m', strtotime($bulan)-2678400);
@@ -61,6 +61,7 @@ function get_data($bulan) {
             }
 
             $opname_old = $opm_old - $opk_old;
+            $opname_old = ($opname_old < 0) ? 0 : $opname_old;
             $opname_now = $opm_now - $opk_now;
             $r_old = ($hrm_old>0) ? $hrm_old/$opm_old : 0;
             $r_now = ($hrm_now>0) ? $hrm_now/$opm_now : 0;

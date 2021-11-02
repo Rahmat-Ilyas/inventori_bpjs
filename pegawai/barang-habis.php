@@ -12,6 +12,7 @@ if (isset($_POST['store'])) {
 }
 
 $laporan = mysqli_query($conn, "SELECT * FROM permintaan_barang WHERE pegawai_id='$pegawai_id' ORDER BY id DESC");
+$barang = mysqli_query($conn, "SELECT * FROM barang");
 ?>
 <!-- Begin Page Content -->
 <div class="container-fluid">

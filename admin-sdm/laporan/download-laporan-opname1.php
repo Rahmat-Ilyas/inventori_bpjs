@@ -60,6 +60,7 @@ function get_data($bulan) {
             }
 
             $opname_old = $opm_old - $opk_old;
+            $opname_old = ($opname_old < 0) ? 0 : $opname_old;
             $opname_now = $opm_now - $opk_now;
             $r_old = ($hrm_old>0) ? $hrm_old/$opm_old : 0;
             $r_now = ($hrm_now>0) ? $hrm_now/$opm_now : 0;
