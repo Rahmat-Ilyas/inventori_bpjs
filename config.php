@@ -1,6 +1,6 @@
 <?php 
 session_start();
-$conn = mysqli_connect('localhost', 'rahmat_ryu', '', 'db_inventori');
+$conn = mysqli_connect('localhost', 'root', '', 'db_inventori');
 
 // CEK NIP
 if (isset($_POST['cekNIP'])) {
@@ -21,4 +21,3 @@ if (isset($_POST['getSatuan'])) {
 	$get = mysqli_fetch_assoc($gets);
 	echo json_encode($get);
 }
-?>

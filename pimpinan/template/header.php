@@ -1,10 +1,10 @@
 <?php
 require('../config.php');
 
-if (!isset($_SESSION['login_adminsdm'])) header("location: ../login.php");
+if (!isset($_SESSION['login_pimpinan'])) header("location: ../login.php");
 
 
-$admin = mysqli_query($conn, "SELECT * FROM admin WHERE role='admin'");
+$admin = mysqli_query($conn, "SELECT * FROM admin WHERE role='pimpinan'");
 
 // Update Akun
 if (isset($_POST['update_akun'])) {
@@ -22,7 +22,7 @@ if (isset($_POST['update_akun'])) {
     if ($updt) $msgedtakun = 'Akun Login berhasil di update';
 }
 
-$admin = mysqli_query($conn, "SELECT * FROM admin WHERE role='admin'");
+$admin = mysqli_query($conn, "SELECT * FROM admin WHERE role='pimpinan'");
 $adm = mysqli_fetch_assoc($admin);
 
 $cntbrgkleuar = mysqli_query($conn, "SELECT * FROM barang_keluar WHERE status='request'");
@@ -43,7 +43,7 @@ $cntbreq = mysqli_num_rows($cntbrgreq);
     <meta name="author" content="">
     <link rel="icon" href="../assets/img/logo2.png" type="image/ico" />
 
-    <title>Inventori BPJS Ketenagakerjaan - Admin SDM</title>
+    <title>Inventori BPJS Ketenagakerjaan - Pimpinan</title>
 
     <!-- Custom fonts for this template-->
     <link href="../assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -85,79 +85,31 @@ $cntbreq = mysqli_num_rows($cntbrgreq);
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Main Menu
+                Laporan Opname
             </div>
 
-            <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-box"></i>
-                    <!-- <span class="beep" style="width: 40px;"></span> -->
-                    <span>Inventori Barang
-                        <?php if ($cntbrkl > 0) { ?>
-                            <label class="badge badge-danger rounded-circle">
-                                <span style="font-size: 12px;"><?= $cntbrkl ?></span>
-                            </label>
-                        <?php } ?>
-                    </span>
-                </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" id="kelola-barang" href="kelola-barang.php">Kelola Barang</a>
-                        <a class="collapse-item" id="pembelian-barang" href="pembelian-barang.php">Pembelian Barang</a>
-                        <a class="collapse-item" id="permintaan-barang" href="permintaan-barang.php">
-                            Permintaan Barang
-                            <?php if ($cntbrkl > 0) { ?>
-                                <label class="badge badge-danger rounded-circle">
-                                    <span style="font-size: 10px;"><?= $cntbrkl ?></span>
-                                </label>
-                            <?php } ?>
-                        </a>
-                    </div>
-                </div>
-            </li>
-
-            <!-- Nav Item - Charts -->
-            <li class="nav-item">
-                <a href="barang-habis.php" class="nav-link" id="barang-habis">
-                    <i class="fas fa-fw fa-archive"></i>
-                    <span>Laporan Barang Habis
-                        <?php if ($cntbreq > 0) { ?>
-                            <label class="badge badge-danger rounded-circle">
-                                <span style="font-size: 12px;"><?= $cntbreq ?></span>
-                            </label>
-                        <?php } ?>
-                    </span>
+                <a class="nav-link" id="laporan-opname1" href="laporan-opname1.php">
+                    <i class="fas fa-fw fa-file-alt"></i><span>Stok Opname (Format 1)</span>
                 </a>
             </li>
 
-            <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-database"></i><span>Master Data</span>
+                <a class="nav-link" id="laporan-opname2" href="laporan-opname2.php">
+                    <i class="fas fa-fw fa-file-alt"></i><span>Stok Opname (Format 2)</span>
                 </a>
-                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" id="kategori-barang" href="kategori-barang.php">Kategori Barang</a>
-                        <a class="collapse-item" id="supplier" href="supplier.php">Data Supplier</a>
-                        <a class="collapse-item" id="data-pegawai" href="data-pegawai.php">Data Pegawai</a>
-                    </div>
-                </div>
             </li>
 
-            <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#laporan" aria-expanded="true" aria-controls="laporan">
-                    <i class="fas fa-fw fa-file"></i><span>Laporan</span>
+                <a class="nav-link" id="laporan-pembelian" href="laporan-pembelian.php">
+                    <i class="fas fa-fw fa-file-alt"></i><span>Laporan Pmbelian Barang</span>
                 </a>
-                <div id="laporan" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" id="laporan-opname1" href="laporan-opname1.php">Stok Opname (Format 1)</a>
-                        <a class="collapse-item" id="laporan-opname2" href="laporan-opname2.php">Stok Opname (Format 2)</a>
-                        <a class="collapse-item" id="laporan-pembelian" href="laporan-pembelian.php">Pembelian Barang</a>
-                        <a class="collapse-item" id="laporan-permintaan" href="laporan-permintaan.php">Barang Keluar</a>
-                    </div>
-                </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" id="laporan-permintaan" href="laporan-permintaan.php">
+                    <i class="fas fa-fw fa-file-alt"></i><span>Laporan Barang Keluar</span>
+                </a>
             </li>
 
             <!-- Divider -->
@@ -186,7 +138,7 @@ $cntbreq = mysqli_num_rows($cntbrgreq);
                     </button>
 
                     <!-- Topbar Search -->
-                    <h4>Sistem Inventori BPJS - Admin SDM</h4>
+                    <h4>Sistem Inventori BPJS - Pimpinan</h4>
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">

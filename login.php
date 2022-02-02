@@ -1,8 +1,9 @@
-<?php 
+<?php
 require('config.php');
 
 if (isset($_SESSION['login_adminsdm'])) header("location: admin-sdm/");
 if (isset($_SESSION['login_pegawai'])) header("location: pegawai/");
+if (isset($_SESSION['login_pimpinan'])) header("location: pimpinan/");
 
 $password = null;
 $username = null;
@@ -13,15 +14,21 @@ if (isset($_POST['login'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    $admin_sdm = mysqli_query($conn, "SELECT * FROM admin_sdm WHERE username = '$username'");
-    $get = mysqli_fetch_assoc($admin_sdm);
+    $admin = mysqli_query($conn, "SELECT * FROM admin WHERE username = '$username'");
+    $get = mysqli_fetch_assoc($admin);
 
     if ($get) {
         $get_password = $get['password'];
         if (password_verify($password, $get_password)) {
-            $_SESSION['login_adminsdm'] = $get_password;
-            header("location: admin-sdm/");
-            exit();
+            if ($get['role'] == 'admin') {
+                $_SESSION['login_adminsdm'] = $get_password;
+                header("location: admin-sdm/");
+                exit();
+            } else if ($get['role'] == 'pimpinan') {
+                $_SESSION['login_pimpinan'] = $get_password;
+                header("location: pimpinan/");
+                exit();
+            }
         } else $err_pass = true;
     } else {
         $pegawai = mysqli_query($conn, "SELECT * FROM pegawai WHERE nip = '$username'");
@@ -56,9 +63,7 @@ if (isset($_POST['login'])) {
 
     <!-- Custom fonts for this template-->
     <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link
-    href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-    rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <!-- Custom styles for this template-->
     <link href="assets/css/sb-admin-2.min.css" rel="stylesheet">
@@ -88,7 +93,7 @@ if (isset($_POST['login'])) {
                                         <div class="form-group">
                                             <input type="text" class="form-control form-control-user" name="username" placeholder="Username">
                                             <?php if ($err_user == true) { ?>
-                                                <div class="text-danger" style="font-size: 13px;">Username tidak ditemukan, periksa kembali!</div>  
+                                                <div class="text-danger" style="font-size: 13px;">Username tidak ditemukan, periksa kembali!</div>
                                             <?php } ?>
                                         </div>
                                         <div class="form-group">
