@@ -1,4 +1,4 @@
-<?php 
+<?php
 require('template/header.php');
 
 if (isset($_POST['submit_accept'])) {
@@ -14,7 +14,12 @@ if (isset($_POST['submit_accept'])) {
     $jumlah = ($jumlah < 0) ? 0 : $jumlah;
 
     mysqli_query($conn, "UPDATE barang SET jumlah='$jumlah' WHERE id='$barang_id'");
-    mysqli_query($conn, "UPDATE barang_keluar SET status='finish' WHERE id='$id'");
+
+    $foto = $_FILES['bukti_pengambilan']['tmp_name'];
+    $nama_foto = 'foto-bukti-' . sprintf('%04s', $id) . '-' . date('ymdhis') . '.jpg';
+    move_uploaded_file($foto, '../assets/img/bukti/' . $nama_foto);
+
+    mysqli_query($conn, "UPDATE barang_keluar SET status='finish', bukti_pengambilan='$nama_foto' WHERE id='$id'");
     echo "<script>location.href='permintaan-saya.php?proses=1'</script>";
 }
 
@@ -32,7 +37,9 @@ $permintaan = mysqli_query($conn, "SELECT * FROM barang_keluar WHERE (status='re
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" style="font-size: 14px;">
                     <thead>
                         <tr class="bg-secondary">
-                            <th colspan="8" class="text-center text-white pt-3 pb-2"><h6><b>Data Permintaan Barang Saya</b></h6></th>
+                            <th colspan="8" class="text-center text-white pt-3 pb-2">
+                                <h6><b>Data Permintaan Barang Saya</b></h6>
+                            </th>
                         </tr>
                         <tr>
                             <th width="10">No</th>
@@ -45,7 +52,8 @@ $permintaan = mysqli_query($conn, "SELECT * FROM barang_keluar WHERE (status='re
                         </tr>
                     </thead>
                     <tbody>
-                        <?php $no=1; foreach ($permintaan as $res) { 
+                        <?php $no = 1;
+                        foreach ($permintaan as $res) {
                             $brgid = $res['barang_id'];
                             $getbarang = mysqli_query($conn, "SELECT * FROM barang WHERE id='$brgid'");
                             $brg = mysqli_fetch_assoc($getbarang); ?>
@@ -54,25 +62,25 @@ $permintaan = mysqli_query($conn, "SELECT * FROM barang_keluar WHERE (status='re
                                 <td>
                                     <a href="#" data-toggle="modal" data-target=".modal-detail<?= $res['id'] ?>"><?= $brg['nama_barang'] ?></a>
                                 </td>
-                                <td><?= $res['jumlah_keluar'].' '.$brg['satuan'] ?></td>
+                                <td><?= $res['jumlah_keluar'] . ' ' . $brg['satuan'] ?></td>
                                 <td><?= date('d/m/Y', strtotime($res['tanggal_keluar'])) ?></td>
                                 <td><?= $res['ket_request'] ? $res['ket_request'] : '-' ?></td>
                                 <td class="text-center">
-                                    <?php 
+                                    <?php
                                     if ($res['status'] == 'accept') $status = ['success', 'Disetujui'];
                                     else if ($res['status'] == 'request') $status = ['primary', 'Ditinjau'];
                                     ?>
                                     <span class="badge badge-pill badge-<?= $status[0] ?>"><?= $status[1] ?></span>
                                 </td>
                                 <td class="text-center">
-                                    <?php  if ($res['status'] == 'accept') { ?>
+                                    <?php if ($res['status'] == 'accept') { ?>
                                         <button class="btn btn-sm btn-success" data-toggle="modal" data-target=".modal-edit<?= $res['id'] ?>" data-toggle1="tooltip" data-original-title="Selesaikan Permintaan"><i class="fa fa-check-circle"></i> Selesaikan</button>
                                     <?php } else if ($res['status'] == 'request') { ?>
                                         <button class="btn btn-sm btn-success" disabled="" data-toggle1="tooltip" data-original-title="Selesaikan Permintaan"><i class="fa fa-check-circle"></i> Selesaikan</button>
                                     <?php } ?>
                                 </td>
                             </tr>
-                            <?php $no=$no+1;
+                        <?php $no = $no + 1;
                         } ?>
                     </tbody>
                 </table>
@@ -82,7 +90,7 @@ $permintaan = mysqli_query($conn, "SELECT * FROM barang_keluar WHERE (status='re
 </div>
 <!-- /.container-fluid -->
 
-<?php foreach ($permintaan as $res) { 
+<?php foreach ($permintaan as $res) {
     $brgid = $res['barang_id'];
     $barang = mysqli_query($conn, "SELECT * FROM barang WHERE id='$brgid'");
     $brg = mysqli_fetch_assoc($barang);
@@ -106,19 +114,29 @@ $permintaan = mysqli_query($conn, "SELECT * FROM barang_keluar WHERE (status='re
                             <table class="table table-bordered">
                                 <tbody>
                                     <tr>
-                                        <td>Nama Barang</td><td>:</td><td><?= $brg['nama_barang'] ?></td>
+                                        <td>Nama Barang</td>
+                                        <td>:</td>
+                                        <td><?= $brg['nama_barang'] ?></td>
                                     </tr>
                                     <tr>
-                                        <td>Kategori</td><td>:</td><td><?= $kat['nama_kategori'] ?></td>
+                                        <td>Kategori</td>
+                                        <td>:</td>
+                                        <td><?= $kat['nama_kategori'] ?></td>
                                     </tr>
                                     <tr>
-                                        <td>Jumlah</td><td>:</td><td><?= $brg['jumlah'].' '.$brg['satuan'] ?></td>
+                                        <td>Jumlah</td>
+                                        <td>:</td>
+                                        <td><?= $brg['jumlah'] . ' ' . $brg['satuan'] ?></td>
                                     </tr>
                                     <tr>
-                                        <td>Stuan</td><td>:</td><td><?= $brg['satuan'] ?></td>
+                                        <td>Stuan</td>
+                                        <td>:</td>
+                                        <td><?= $brg['satuan'] ?></td>
                                     </tr>
                                     <tr>
-                                        <td>Keterangan</td><td>:</td><td><?= $brg['keterangan'] ?></td>
+                                        <td>Keterangan</td>
+                                        <td>:</td>
+                                        <td><?= $brg['keterangan'] ?></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -145,8 +163,15 @@ $permintaan = mysqli_query($conn, "SELECT * FROM barang_keluar WHERE (status='re
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 </div>
                 <div class="modal-body">
-                    <form class="form-horizontal" method="POST">
+                    <form class="form-horizontal" method="POST" enctype="multipart/form-data">
                         <p>Pastikan anda telah mengambil barang yang anda minta di gudang. Klik "Selesaikan" untuk menyelesaikan permintaan barang</p>
+                        <hr>
+                        <div class="form-group">
+                            <label><b>Upload Bukti Pengambilan</b></label>
+                            <input type="file" class="form-control" name="bukti_pengambilan" required>
+                            <small>*Silahkan upload foto bukti pengambilan barang!</small>
+                        </div>
+                        <hr>
                         <div class="form-group row">
                             <div class="col-md-12 text-center">
                                 <input type="hidden" name="id" value="<?= $res['id'] ?>">
@@ -161,7 +186,7 @@ $permintaan = mysqli_query($conn, "SELECT * FROM barang_keluar WHERE (status='re
     </div>
 <?php } ?>
 
-<?php 
+<?php
 require('template/footer.php');
 ?>
 
@@ -175,11 +200,11 @@ require('template/footer.php');
                     title: 'Berhasil Diproses',
                     text: 'Data Permintaan Barang berhasil diselesaikan',
                     type: 'success',
-                    onClose: () => { 
+                    onClose: () => {
                         location.href = 'riwayat.php';
                     }
                 });
-            <?php }
+        <?php }
         } ?>
     });
 </script>

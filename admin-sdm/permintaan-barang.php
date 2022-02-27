@@ -1,4 +1,4 @@
-<?php 
+<?php
 require('template/header.php');
 
 if (isset($_POST['submit_accept'])) {
@@ -43,7 +43,9 @@ $supplier = mysqli_query($conn, "SELECT * FROM supplier");
 				<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" style="font-size: 14px;">
 					<thead>
 						<tr class="bg-primary">
-							<th colspan="8" class="text-center text-white pt-3 pb-2"><h6><b>Data Permintaan Baru</b></h6></th>
+							<th colspan="8" class="text-center text-white pt-3 pb-2">
+								<h6><b>Data Permintaan Baru</b></h6>
+							</th>
 						</tr>
 						<tr>
 							<th>No</th>
@@ -57,7 +59,8 @@ $supplier = mysqli_query($conn, "SELECT * FROM supplier");
 						</tr>
 					</thead>
 					<tbody>
-						<?php $no=1; foreach ($result1 as $res1) { 
+						<?php $no = 1;
+						foreach ($result1 as $res1) {
 							$brgid = $res1['barang_id'];
 							$getbarang = mysqli_query($conn, "SELECT * FROM barang WHERE id='$brgid'");
 							$brg = mysqli_fetch_assoc($getbarang);
@@ -75,14 +78,14 @@ $supplier = mysqli_query($conn, "SELECT * FROM supplier");
 								</td>
 								<td><?= $pgw['nip'] ?></td>
 								<td><?= date('d/m/Y', strtotime($res1['tanggal_keluar'])) ?></td>
-								<td><?= $res1['jumlah_keluar'].' '.$brg['satuan'] ?></td>
+								<td><?= $res1['jumlah_keluar'] . ' ' . $brg['satuan'] ?></td>
 								<td><?= $res1['ket_request'] ? $res1['ket_request'] : '-' ?></td>
 								<td class="text-center">
 									<button class="btn btn-sm btn-success" data-toggle="modal" data-target=".modal-edit<?= $res1['id'] ?>" data-toggle1="tooltip" data-original-title="Terima Permintaan"><i class="fa fa-check-circle"></i></button>
 									<button class="btn btn-sm btn-danger" data-toggle="modal" data-target=".modal-delete<?= $res1['id'] ?>" data-toggle1="tooltip" data-original-title="Tolak Permintaan"><i class="fa fa-times-circle"></i></button>
 								</td>
 							</tr>
-							<?php $no=$no+1;
+						<?php $no = $no + 1;
 						} ?>
 					</tbody>
 					<thead>
@@ -90,7 +93,9 @@ $supplier = mysqli_query($conn, "SELECT * FROM supplier");
 							<th colspan="8"></th>
 						</tr>
 						<tr class="bg-secondary">
-							<th colspan="8" class="text-center text-white pt-3 pb-2"><h6><b>Riwayat Data Permintaan</b></h6></th>
+							<th colspan="8" class="text-center text-white pt-3 pb-2">
+								<h6><b>Riwayat Data Permintaan</b></h6>
+							</th>
 						</tr>
 						<tr>
 							<th>No</th>
@@ -104,7 +109,8 @@ $supplier = mysqli_query($conn, "SELECT * FROM supplier");
 						</tr>
 					</thead>
 					<tbody>
-						<?php $no=1; foreach ($result2 as $res2) { 
+						<?php $no = 1;
+						foreach ($result2 as $res2) {
 							$brgid = $res2['barang_id'];
 							$getbarang = mysqli_query($conn, "SELECT * FROM barang WHERE id='$brgid'");
 							$brg = mysqli_fetch_assoc($getbarang);
@@ -120,20 +126,25 @@ $supplier = mysqli_query($conn, "SELECT * FROM supplier");
 								<td>
 									<a href="#" data-toggle="modal" data-target=".modal-pegawai<?= $res2['id'] ?>"><?= $pgw['nama'] ?></a>
 								</td>
-								<td><?= $res2['jumlah_keluar'].' '.$brg['satuan'] ?></td>
+								<td><?= $res2['jumlah_keluar'] . ' ' . $brg['satuan'] ?></td>
 								<td><?= date('d/m/Y', strtotime($res2['tanggal_keluar'])) ?></td>
 								<td><?= $res2['ket_request'] ? $res2['ket_request'] : '-' ?></td>
 								<td><?= $res2['ket_response'] ? $res2['ket_response'] : '-' ?></td>
 								<td class="text-center">
-									<?php 
+									<?php
 									if ($res2['status'] == 'accept') $status = ['primary', 'Disetujui'];
 									else if ($res2['status'] == 'refuse') $status = ['danger', 'Ditolak'];
 									else if ($res2['status'] == 'finish') $status = ['success', 'Selesai'];
 									?>
 									<span class="badge badge-pill badge-<?= $status[0] ?>"><?= $status[1] ?></span>
+									<?php
+									if (isset($res2['bukti_pengambilan'])) { ?>
+										<br>
+										<small><a href="#" data-toggle="modal" data-target=".modal-bukti<?= $res2['id'] ?>">lihat bukti</a></small>
+									<?php } ?>
 								</td>
 							</tr>
-							<?php $no=$no+1;
+						<?php $no = $no + 1;
 						} ?>
 					</tbody>
 				</table>
@@ -144,7 +155,7 @@ $supplier = mysqli_query($conn, "SELECT * FROM supplier");
 </div>
 <!-- /.container-fluid -->
 
-<?php foreach ($results as $res) { 
+<?php foreach ($results as $res) {
 	$brgid = $res['barang_id'];
 	$barang = mysqli_query($conn, "SELECT * FROM barang WHERE id='$brgid'");
 	$brg = mysqli_fetch_assoc($barang);
@@ -172,19 +183,29 @@ $supplier = mysqli_query($conn, "SELECT * FROM supplier");
 							<table class="table table-bordered">
 								<tbody>
 									<tr>
-										<td>Nama Barang</td><td>:</td><td><?= $brg['nama_barang'] ?></td>
+										<td>Nama Barang</td>
+										<td>:</td>
+										<td><?= $brg['nama_barang'] ?></td>
 									</tr>
 									<tr>
-										<td>Kategori</td><td>:</td><td><?= $kat['nama_kategori'] ?></td>
+										<td>Kategori</td>
+										<td>:</td>
+										<td><?= $kat['nama_kategori'] ?></td>
 									</tr>
 									<tr>
-										<td>Jumlah</td><td>:</td><td><?= $brg['jumlah'].' '.$brg['satuan'] ?></td>
+										<td>Jumlah</td>
+										<td>:</td>
+										<td><?= $brg['jumlah'] . ' ' . $brg['satuan'] ?></td>
 									</tr>
 									<tr>
-										<td>Stuan</td><td>:</td><td><?= $brg['satuan'] ?></td>
+										<td>Stuan</td>
+										<td>:</td>
+										<td><?= $brg['satuan'] ?></td>
 									</tr>
 									<tr>
-										<td>Keterangan</td><td>:</td><td><?= $brg['keterangan'] ?></td>
+										<td>Keterangan</td>
+										<td>:</td>
+										<td><?= $brg['keterangan'] ?></td>
 									</tr>
 								</tbody>
 							</table>
@@ -222,19 +243,29 @@ $supplier = mysqli_query($conn, "SELECT * FROM supplier");
 										</td>
 									</tr>
 									<tr>
-										<td>Nama Pegawai</td><td>:</td><td><?= $pgw['nama'] ?></td>
+										<td>Nama Pegawai</td>
+										<td>:</td>
+										<td><?= $pgw['nama'] ?></td>
 									</tr>
 									<tr>
-										<td>NIP</td><td>:</td><td><?= $pgw['nip'] ?></td>
+										<td>NIP</td>
+										<td>:</td>
+										<td><?= $pgw['nip'] ?></td>
 									</tr>
 									<tr>
-										<td>Jabatan</td><td>:</td><td><?= $pgw['jabatan'] ?></td>
+										<td>Jabatan</td>
+										<td>:</td>
+										<td><?= $pgw['jabatan'] ?></td>
 									</tr>
 									<tr>
-										<td>Telepon</td><td>:</td><td><?= $pgw['telepon'] ?></td>
+										<td>Telepon</td>
+										<td>:</td>
+										<td><?= $pgw['telepon'] ?></td>
 									</tr>
 									<tr>
-										<td>Email</td><td>:</td><td><?= $pgw['email'] ?></td>
+										<td>Email</td>
+										<td>:</td>
+										<td><?= $pgw['email'] ?></td>
 									</tr>
 								</tbody>
 							</table>
@@ -313,9 +344,33 @@ $supplier = mysqli_query($conn, "SELECT * FROM supplier");
 			</div>
 		</div>
 	</div>
+<?php }
+foreach ($result2 as $res2) {
+?>
+	<!-- MODAL BUKTI -->
+	<div class="modal modal-bukti<?= $res2['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myLargeModalLabel">Foto Bukti Pengambilan Barang</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				</div>
+				<div class="modal-body">
+					<img src="../assets/img/bukti/<?= $res2['bukti_pengambilan'] ?>" style="width: 100%;" alt="">
+
+					<div class="form-group row">
+						<div class="col-md-1"></div>
+						<div class="col-md-10 text-right">
+							<button class="btn btn-secondary" type="button" data-dismiss="modal" aria-hidden="true">Tutup</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 <?php } ?>
 
-<?php 
+<?php
 require('template/footer.php');
 ?>
 
@@ -327,10 +382,13 @@ require('template/footer.php');
 		$('#chgBarang').change(function(event) {
 			var id = $(this).val();
 			$.ajax({
-				url     : '../config.php',
-				method  : "POST",
-				data    : { getSatuan: true, id: id },
-				success : function(data) {
+				url: '../config.php',
+				method: "POST",
+				data: {
+					getSatuan: true,
+					id: id
+				},
+				success: function(data) {
 					$('.satuan').val(data).text(data);
 				}
 			});
