@@ -10,7 +10,7 @@ if (isset($_POST['store'])) {
     $cek_barang = mysqli_query($conn, "SELECT * FROM barang WHERE id='$barang_id'");
     $stok = mysqli_fetch_assoc($cek_barang);
     if ($stok['jumlah'] > $jumlah_keluar) {
-        mysqli_query($conn, "INSERT INTO barang_keluar VALUES (NULL, '$barang_id', '$pegawai_id', '$jumlah_keluar', '$tanggal', '$keterangan', NULL, 'request')");
+        mysqli_query($conn, "INSERT INTO barang_keluar VALUES (NULL, '$barang_id', '$pegawai_id', '$jumlah_keluar', '$tanggal', '$keterangan', NULL, NULL, 'request')");
         echo "<script>location.href='permintaan-barang.php?proses=1'</script>";
     } else {
         echo "<script>location.href='permintaan-barang.php?proses=2&barang_id=".$barang_id."'</script>";
