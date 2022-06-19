@@ -178,7 +178,12 @@ function get_bulan($bln)
             </tr>
         </thead>
         <tbody>
-            <?php $no = 1;
+            <?php
+            $no = 1;
+            $total1 = 0;
+            $total2 = 0;
+            $total3 = 0;
+            $total4 = 0;
             foreach ($results['kategori'] as $kat) { ?>
                 <tr>
                     <td colspan="2"><b><?= strtoupper($kat['nama_kategori']) ?></b></td>
@@ -197,34 +202,84 @@ function get_bulan($bln)
                     <td></td>
                     <td></td>
                 </tr>
-                <?php foreach ($results['barang'] as $brg) {
-                    if ($brg['katid'] == $kat['id']) { ?>
+                <?php
+                $jumlah1 = 0;
+                $jumlah2 = 0;
+                $jumlah3 = 0;
+                $jumlah4 = 0;
+                foreach ($results['barang'] as $brg) {
+                    if ($brg['katid'] == $kat['id']) {
+                        $jumlah1 = $jumlah1 + $brg['opname_old'][2];
+                        $jumlah2 = $jumlah2 + $brg['brg_masuk'][2];
+                        $jumlah3 = $jumlah3 + $brg['brg_keluar'][2];
+                        $jumlah4 = $jumlah4 + $brg['opname_now'][2];
+                ?>
                         <tr>
                             <td><?= $no ?></td>
                             <td><?= $brg['nama_barang'] ?></td>
 
                             <td><?= $brg['opname_old'][0] ?></td>
-                            <td>Rp.<?= $brg['opname_old'][1] ?></td>
-                            <td>Rp.<?= $brg['opname_old'][2] ?></td>
+                            <td>Rp.<?= number_format($brg['opname_old'][1]) ?></td>
+                            <td>Rp.<?= number_format($brg['opname_old'][2]) ?></td>
 
                             <td><?= $brg['brg_masuk'][0] ?></td>
-                            <td>Rp.<?= $brg['brg_masuk'][1] ?></td>
-                            <td>Rp.<?= $brg['brg_masuk'][2] ?></td>
+                            <td>Rp.<?= number_format($brg['brg_masuk'][1]) ?></td>
+                            <td>Rp.<?= number_format($brg['brg_masuk'][2]) ?></td>
 
                             <td><?= $brg['brg_keluar'][0] ?></td>
-                            <td>Rp.<?= $brg['brg_keluar'][1] ?></td>
-                            <td>Rp.<?= $brg['brg_keluar'][2] ?></td>
+                            <td>Rp.<?= number_format($brg['brg_keluar'][1]) ?></td>
+                            <td>Rp.<?= number_format($brg['brg_keluar'][2]) ?></td>
 
                             <td><?= $brg['opname_now'][0] ?></td>
-                            <td>Rp.<?= $brg['opname_now'][1] ?></td>
-                            <td>Rp.<?= $brg['opname_now'][2] ?></td>
+                            <td>Rp.<?= number_format($brg['opname_now'][1]) ?></td>
+                            <td>Rp.<?= number_format($brg['opname_now'][2]) ?></td>
 
                             <td></td>
                         </tr>
-            <?php $no = $no + 1;
+                <?php
+                        $no = $no + 1;
                     }
                 }
-            } ?>
+                ?>
+                <tr>
+                    <td colspan="2"><b>Jumlah</b></td>
+                    <td></td>
+                    <td></td>
+                    <td><b>Rp.<?= number_format($jumlah1) ?></b></td>
+                    <td></td>
+                    <td></td>
+                    <td><b>Rp.<?= number_format($jumlah2) ?></b></td>
+                    <td></td>
+                    <td></td>
+                    <td><b>Rp.<?= number_format($jumlah3) ?></b></td>
+                    <td></td>
+                    <td></td>
+                    <td><b>Rp.<?= number_format($jumlah4) ?></b></td>
+                    <td></td>
+                </tr>
+            <?php
+                $total1 = $total1 + $jumlah1;
+                $total2 = $total2 + $jumlah2;
+                $total3 = $total3 + $jumlah3;
+                $total4 = $total4 + $jumlah4;
+            }
+            ?>
+            <tr class="bg-dark text-white">
+                <td colspan="2" class="text-center"><b>Jumlah Total Keseluruhan</b></td>
+                <td></td>
+                <td></td>
+                <td><b>Rp.<?= number_format($total1) ?></b></td>
+                <td></td>
+                <td></td>
+                <td><b>Rp.<?= number_format($total2) ?></b></td>
+                <td></td>
+                <td></td>
+                <td><b>Rp.<?= number_format($total3) ?></b></td>
+                <td></td>
+                <td></td>
+                <td><b>Rp.<?= number_format($total4) ?></b></td>
+                <td></td>
+            </tr>
         </tbody>
     </table>
 </body>
