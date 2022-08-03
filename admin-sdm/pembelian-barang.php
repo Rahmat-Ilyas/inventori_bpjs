@@ -88,6 +88,7 @@ $supplier = mysqli_query($conn, "SELECT * FROM supplier");
 					<thead>
 						<tr>
 							<th>No</th>
+							<th>Kode Pembelian</th>
 							<th>Barang</th>
 							<th width="70">Tggl Beli</th>
 							<th>Jumlah</th>
@@ -109,6 +110,7 @@ $supplier = mysqli_query($conn, "SELECT * FROM supplier");
 							$spl = mysqli_fetch_assoc($getsupplier); ?>
 							<tr>
 								<td><?= $no ?></td>
+								<td>BL-<?= date('dmy', strtotime($res['tanggal_masuk'])).'-'.sprintf('%04s', $res['id']) ?></td>
 								<td>
 									<a href="#" data-toggle="modal" data-target=".modal-detail<?= $res['id'] ?>"><?= $brg['nama_barang'] ?></a>
 								</td>

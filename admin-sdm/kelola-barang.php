@@ -55,6 +55,7 @@ $kategori = mysqli_query($conn, "SELECT * FROM kategori");
                     <thead>
                         <tr>
                             <th width="5">No</th>
+                            <th>Kode Barang</th>
                             <th>Nama Barang</th>
                             <th>Kategori</th>
                             <th>Jumlah</th>
@@ -72,6 +73,7 @@ $kategori = mysqli_query($conn, "SELECT * FROM kategori");
                             ?>
                             <tr>
                                 <td><?= $no ?></td>
+                                <td>BR-<?= sprintf('%04s', $res['kategori_id']).'-'.sprintf('%04s', $res['id']) ?></td>
                                 <td><?= $res['nama_barang'] ?></td>
                                 <td><?= $kat['nama_kategori'] ?></td>
                                 <td><?= $res['jumlah'] ?></td>

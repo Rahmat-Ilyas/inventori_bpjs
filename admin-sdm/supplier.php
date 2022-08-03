@@ -54,6 +54,7 @@ $results = mysqli_query($conn, "SELECT * FROM supplier");
                     <thead>
                         <tr>
                             <th width="5">No</th>
+                            <th>Kode Supplier</th>
                             <th>Nama Supplier</th>
                             <th>Alamat</th>
                             <th>Telepon</th>
@@ -65,6 +66,7 @@ $results = mysqli_query($conn, "SELECT * FROM supplier");
                         <?php $no=1; foreach ($results as $res) { ?>
                             <tr>
                                 <td><?= $no ?></td>
+                                <td>SUP-<?= sprintf('%05s', $res['id']) ?></td>
                                 <td><?= $res['nama_supplier'] ?></td>
                                 <td><?= $res['alamat'] ?></td>
                                 <td><?= $res['telepon'] ?></td>
