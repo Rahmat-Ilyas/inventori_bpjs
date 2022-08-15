@@ -1,23 +1,24 @@
-<?php 
+<?php
 require('template/header.php');
 
 
 if (isset($_POST['view_data'])) {
     if ($_POST['laporan'] == 'harian') {
         $results = get_data('harian', date('dmy', strtotime($_POST['tanggal'])));
-        $title = "Laporan Data Pembelian Barang per Tanggal ".date('d/m/Y', strtotime($_POST['tanggal']));
+        $title = "Laporan Data Pembelian Barang per Tanggal " . date('d/m/Y', strtotime($_POST['tanggal']));
         $_POST['bulan'] = date('Y-m');
     } else if ($_POST['laporan'] == 'bulanan') {
         $results = get_data('bulanan', date('m', strtotime($_POST['bulan'])));
-        $title = "Laporan Data Pembelian Barang per Bulan ".date('m/Y', strtotime($_POST['bulan']));
+        $title = "Laporan Data Pembelian Barang per Bulan " . date('m/Y', strtotime($_POST['bulan']));
         $_POST['tanggal'] = date('Y-m-d');
     }
 } else {
     $results = get_data('harian', date('dmy'));
-    $title = "Laporan Data Pembelian Barang per Tanggal ".date('d/m/Y');
+    $title = "Laporan Data Pembelian Barang per Tanggal " . date('d/m/Y');
 }
 
-function get_data($laporan, $waktu) {
+function get_data($laporan, $waktu)
+{
     global $conn;
     $results = [];
 
@@ -45,10 +46,9 @@ function get_data($laporan, $waktu) {
             $dta['nama_barang'] = $brg['nama_barang'];
             $dta['satuan'] = $brg['satuan'];
             $dta['nama_kategori'] = $ktg['nama_kategori'];
-            $dta['nama_supplier'] = $spl['nama_supplier'];
+            $dta['nama_supplier'] = $spl ? $spl['nama_supplier'] : '-';
             $results[] = $dta;
         }
-
     }
     return $results;
 } ?>
@@ -106,19 +106,20 @@ function get_data($laporan, $waktu) {
                         </tr>
                     </thead>
                     <tbody>
-                        <?php $no=1; foreach ($results as $res) { ?>
+                        <?php $no = 1;
+                        foreach ($results as $res) { ?>
                             <tr>
                                 <td><?= $no ?></td>
                                 <td><?= $res['nama_barang'] ?></td>
                                 <td><?= $res['nama_kategori'] ?></td>
                                 <td><?= date('d/m/Y', strtotime($res['tanggal_masuk'])) ?></td>
-                                <td><?= $res['jumlah_masuk'].' '.$res['satuan'] ?></td>
-                                <td>Rp.<?= $res['harga'] ?></td>
-                                <td>Rp.<?= $res['harga']*$res['jumlah_masuk'] ?></td>
+                                <td><?= $res['jumlah_masuk'] . ' ' . $res['satuan'] ?></td>
+                                <td>Rp.<?= number_format($res['harga'], 2, ',', '.') ?></td>
+                                <td>Rp.<?= number_format($res['harga'] * $res['jumlah_masuk'], 2, ',', '.') ?></td>
                                 <td><?= $res['nama_supplier'] ?></td>
                                 <td><?= $res['keterangan'] ? $res['keterangan'] : '-' ?></td>
                             </tr>
-                            <?php $no=$no+1; 
+                        <?php $no = $no + 1;
                         } ?>
                     </tbody>
                 </table>
@@ -129,7 +130,7 @@ function get_data($laporan, $waktu) {
 </div>
 <!-- /.container-fluid -->
 
-<?php 
+<?php
 require('template/footer.php');
 ?>
 
@@ -161,6 +162,6 @@ require('template/footer.php');
         <?php } else if (isset($_POST['laporan']) && $_POST['laporan'] == 'bulanan') { ?>
             $('#tanggal').attr('hidden', '');
             $('#bulan').removeAttr('hidden');
-        <?php } ?>        
+        <?php } ?>
     });
 </script>

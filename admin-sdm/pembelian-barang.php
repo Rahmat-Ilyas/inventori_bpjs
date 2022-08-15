@@ -1,4 +1,4 @@
-<?php 
+<?php
 require('template/header.php');
 
 if (isset($_POST['submit_add'])) {
@@ -18,7 +18,7 @@ if (isset($_POST['submit_add'])) {
 	mysqli_query($conn, "UPDATE barang SET jumlah='$jumlah' WHERE id='$barang_id'");
 
 	// Update Laporan Permintaan
-    mysqli_query($conn, "UPDATE permintaan_barang SET status='finish' WHERE barang_id='$barang_id'");    
+	mysqli_query($conn, "UPDATE permintaan_barang SET status='finish' WHERE barang_id='$barang_id'");
 
 	echo "<script>location.href='pembelian-barang.php?proses=1'</script>";
 }
@@ -39,7 +39,7 @@ if (isset($_POST['submit_edit'])) {
 	$getbrg = mysqli_query($conn, "SELECT * FROM barang WHERE id='$barang_id'");
 	$brg = mysqli_fetch_assoc($getbrg);
 	$jumlah = $brg['jumlah'] - $jmlhmsk_old + $jumlah_masuk;
-	if ($jumlah<0) $jumlah = 0;
+	if ($jumlah < 0) $jumlah = 0;
 	mysqli_query($conn, "UPDATE barang SET jumlah='$jumlah' WHERE id='$barang_id'");
 
 	echo "<script>location.href='pembelian-barang.php?proses=2'</script>";
@@ -54,7 +54,7 @@ if (isset($_POST['submit_delete'])) {
 	$getbrg = mysqli_query($conn, "SELECT * FROM barang WHERE id='$barang_id'");
 	$brg = mysqli_fetch_assoc($getbrg);
 	$jumlah = $brg['jumlah'] - $jmlhmsk_old;
-	if ($jumlah<0) $jumlah = 0;
+	if ($jumlah < 0) $jumlah = 0;
 	mysqli_query($conn, "UPDATE barang SET jumlah='$jumlah' WHERE id='$barang_id'");
 
 	mysqli_query($conn, "DELETE FROM barang_masuk WHERE id='$id'");
@@ -100,7 +100,8 @@ $supplier = mysqli_query($conn, "SELECT * FROM supplier");
 						</tr>
 					</thead>
 					<tbody>
-						<?php $no=1; foreach ($results as $res) { 
+						<?php $no = 1;
+						foreach ($results as $res) {
 							$brgid = $res['barang_id'];
 							$getbarang = mysqli_query($conn, "SELECT * FROM barang WHERE id='$brgid'");
 							$brg = mysqli_fetch_assoc($getbarang);
@@ -110,22 +111,22 @@ $supplier = mysqli_query($conn, "SELECT * FROM supplier");
 							$spl = mysqli_fetch_assoc($getsupplier); ?>
 							<tr>
 								<td><?= $no ?></td>
-								<td>BL-<?= date('dmy', strtotime($res['tanggal_masuk'])).'-'.sprintf('%04s', $res['id']) ?></td>
+								<td>BL-<?= date('dmy', strtotime($res['tanggal_masuk'])) . '-' . sprintf('%04s', $res['id']) ?></td>
 								<td>
 									<a href="#" data-toggle="modal" data-target=".modal-detail<?= $res['id'] ?>"><?= $brg['nama_barang'] ?></a>
 								</td>
 								<td><?= date('d/m/Y', strtotime($res['tanggal_masuk'])) ?></td>
-								<td><?= $res['jumlah_masuk'].' '.$brg['satuan'] ?></td>
-								<td>Rp.<?= $res['harga'] ?></td>
-								<td>Rp.<?= $res['harga']*$res['jumlah_masuk'] ?></td>
-								<td><?= $spl['nama_supplier'] ?></td>
+								<td><?= $res['jumlah_masuk'] . ' ' . $brg['satuan'] ?></td>
+								<td>Rp.<?= number_format($res['harga'], 2, ',', '.') ?></td>
+								<td>Rp.<?= number_format($res['harga'] * $res['jumlah_masuk'], 2, ',', '.') ?></td>
+								<td><?= $spl ? $spl['nama_supplier'] : '-' ?></td>
 								<td><?= $res['keterangan'] ? $res['keterangan'] : '-' ?></td>
 								<td class="text-center">
 									<button class="btn btn-sm btn-success" data-toggle="modal" data-target=".modal-edit<?= $res['id'] ?>" data-toggle1="tooltip" data-original-title="Edit Data"><i class="fa fa-edit"></i></button>
 									<button class="btn btn-sm btn-danger" data-toggle="modal" data-target=".modal-delete<?= $res['id'] ?>" data-toggle1="tooltip" data-original-title="Hapus Data"><i class="fa fa-trash"></i></button>
 								</td>
 							</tr>
-							<?php $no=$no+1;
+						<?php $no = $no + 1;
 						} ?>
 					</tbody>
 				</table>
@@ -210,7 +211,7 @@ $supplier = mysqli_query($conn, "SELECT * FROM supplier");
 	</div>
 </div>
 
-<?php foreach ($results as $res) { 
+<?php foreach ($results as $res) {
 	$brgid = $res['barang_id'];
 	$barang = mysqli_query($conn, "SELECT * FROM barang WHERE id='$brgid'");
 	$brg = mysqli_fetch_assoc($barang);
@@ -234,19 +235,29 @@ $supplier = mysqli_query($conn, "SELECT * FROM supplier");
 							<table class="table table-bordered">
 								<tbody>
 									<tr>
-										<td>Nama Barang</td><td>:</td><td><?= $brg['nama_barang'] ?></td>
+										<td>Nama Barang</td>
+										<td>:</td>
+										<td><?= $brg['nama_barang'] ?></td>
 									</tr>
 									<tr>
-										<td>Kategori</td><td>:</td><td><?= $kat['nama_kategori'] ?></td>
+										<td>Kategori</td>
+										<td>:</td>
+										<td><?= $kat['nama_kategori'] ?></td>
 									</tr>
 									<tr>
-										<td>Jumlah</td><td>:</td><td><?= $brg['jumlah'].' '.$brg['satuan'] ?></td>
+										<td>Jumlah</td>
+										<td>:</td>
+										<td><?= $brg['jumlah'] . ' ' . $brg['satuan'] ?></td>
 									</tr>
 									<tr>
-										<td>Stuan</td><td>:</td><td><?= $brg['satuan'] ?></td>
+										<td>Stuan</td>
+										<td>:</td>
+										<td><?= $brg['satuan'] ?></td>
 									</tr>
 									<tr>
-										<td>Keterangan</td><td>:</td><td><?= $brg['keterangan'] ?></td>
+										<td>Keterangan</td>
+										<td>:</td>
+										<td><?= $brg['keterangan'] ?></td>
 									</tr>
 								</tbody>
 							</table>
@@ -312,7 +323,7 @@ $supplier = mysqli_query($conn, "SELECT * FROM supplier");
 								<select name="supplier_id" class="form-control" required="required">
 									<option value="">.::Pilih Supplier::.</option>
 									<?php foreach ($supplier as $spl) { ?>
-										<option value="<?= $spl['id'] ?>" <?php if($spl['id'] == $res['supplier_id']) echo 'selected'; ?>><?= $spl['nama_supplier'] ?></option>
+										<option value="<?= $spl['id'] ?>" <?php if ($spl['id'] == $res['supplier_id']) echo 'selected'; ?>><?= $spl['nama_supplier'] ?></option>
 									<?php } ?>
 								</select>
 							</div>
@@ -360,7 +371,7 @@ $supplier = mysqli_query($conn, "SELECT * FROM supplier");
 	</div>
 <?php } ?>
 
-<?php 
+<?php
 require('template/footer.php');
 ?>
 
@@ -372,10 +383,13 @@ require('template/footer.php');
 		$('#chgBarang').change(function(event) {
 			var id = $(this).val();
 			$.ajax({
-				url     : '../config.php',
-				method  : "POST",
-				data    : { getSatuan: true, id: id },
-				success : function(data) {
+				url: '../config.php',
+				method: "POST",
+				data: {
+					getSatuan: true,
+					id: id
+				},
+				success: function(data) {
 					$('.satuan').val(data.satuan).text(data.satuan);
 				}
 			});

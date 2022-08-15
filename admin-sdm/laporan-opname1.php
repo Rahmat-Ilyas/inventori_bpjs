@@ -221,20 +221,20 @@ function get_bulan($bln)
                                         <td><?= $brg['nama_barang'] ?></td>
 
                                         <td><?= $brg['opname_old'][0] ?></td>
-                                        <td>Rp.<?= number_format($brg['opname_old'][1]) ?></td>
-                                        <td>Rp.<?= number_format($brg['opname_old'][2]) ?></td>
+                                        <td>Rp.<?= number_format($brg['opname_old'][1], 2, ',', '.') ?></td>
+                                        <td>Rp.<?= number_format($brg['opname_old'][2], 2, ',', '.') ?></td>
 
                                         <td><?= $brg['brg_masuk'][0] ?></td>
-                                        <td>Rp.<?= number_format($brg['brg_masuk'][1]) ?></td>
-                                        <td>Rp.<?= number_format($brg['brg_masuk'][2]) ?></td>
+                                        <td>Rp.<?= number_format($brg['brg_masuk'][1], 2, ',', '.') ?></td>
+                                        <td>Rp.<?= number_format($brg['brg_masuk'][2], 2, ',', '.') ?></td>
 
                                         <td><?= $brg['brg_keluar'][0] ?></td>
-                                        <td>Rp.<?= number_format($brg['brg_keluar'][1]) ?></td>
-                                        <td>Rp.<?= number_format($brg['brg_keluar'][2]) ?></td>
+                                        <td>Rp.<?= number_format($brg['brg_keluar'][1], 2, ',', '.') ?></td>
+                                        <td>Rp.<?= number_format($brg['brg_keluar'][2], 2, ',', '.') ?></td>
 
                                         <td><?= $brg['opname_now'][0] ?></td>
-                                        <td>Rp.<?= number_format($brg['opname_now'][1]) ?></td>
-                                        <td>Rp.<?= number_format($brg['opname_now'][2]) ?></td>
+                                        <td>Rp.<?= number_format($brg['opname_now'][1], 2, ',', '.') ?></td>
+                                        <td>Rp.<?= number_format($brg['opname_now'][2], 2, ',', '.') ?></td>
 
                                         <td></td>
                                     </tr>
@@ -247,16 +247,16 @@ function get_bulan($bln)
                                 <td colspan="2" class="text-center"><b>Jumlah</b></td>
                                 <td></td>
                                 <td></td>
-                                <td><b>Rp.<?= number_format($jumlah1) ?></b></td>
+                                <td><b>Rp.<?= number_format($jumlah1, 2, ',', '.') ?></b></td>
                                 <td></td>
                                 <td></td>
-                                <td><b>Rp.<?= number_format($jumlah2) ?></b></td>
+                                <td><b>Rp.<?= number_format($jumlah2, 2, ',', '.') ?></b></td>
                                 <td></td>
                                 <td></td>
-                                <td><b>Rp.<?= number_format($jumlah3) ?></b></td>
+                                <td><b>Rp.<?= number_format($jumlah3, 2, ',', '.') ?></b></td>
                                 <td></td>
                                 <td></td>
-                                <td><b>Rp.<?= number_format($jumlah4) ?></b></td>
+                                <td><b>Rp.<?= number_format($jumlah4, 2, ',', '.') ?></b></td>
                                 <td></td>
                             </tr>
                         <?php
@@ -270,16 +270,16 @@ function get_bulan($bln)
                             <td colspan="2" class="text-center"><b>Jumlah Total Keseluruhan</b></td>
                             <td></td>
                             <td></td>
-                            <td><b>Rp.<?= number_format($total1) ?></b></td>
+                            <td><b>Rp.<?= number_format($total1, 2, ',', '.') ?></b></td>
                             <td></td>
                             <td></td>
-                            <td><b>Rp.<?= number_format($total2) ?></b></td>
+                            <td><b>Rp.<?= number_format($total2, 2, ',', '.') ?></b></td>
                             <td></td>
                             <td></td>
-                            <td><b>Rp.<?= number_format($total3) ?></b></td>
+                            <td><b>Rp.<?= number_format($total3, 2, ',', '.') ?></b></td>
                             <td></td>
                             <td></td>
-                            <td><b>Rp.<?= number_format($total4) ?></b></td>
+                            <td><b>Rp.<?= number_format($total4, 2, ',', '.') ?></b></td>
                             <td></td>
                         </tr>
                     </tbody>
