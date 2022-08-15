@@ -15,11 +15,11 @@
                             <div class="modal-body px-5" style="margin-bottom: -20px;">
                                 <div class="form-group">
                                     <label>Nama</label>
-                                    <input type="text" class="form-control" name="nama" required autocomplete="off" placeholder="Nama" value="<?=$adm['nama'] ?>">
+                                    <input type="text" class="form-control" name="nama" required autocomplete="off" placeholder="Nama" value="<?= $adm['nama'] ?>">
                                 </div>
                                 <div class="form-group">
                                     <label>Username</label>
-                                    <input type="text" class="form-control" name="username" required autocomplete="off" placeholder="Username" value="<?=$adm['username'] ?>">
+                                    <input type="text" class="form-control" name="username" required autocomplete="off" placeholder="Username" value="<?= $adm['username'] ?>">
                                 </div>
                                 <div class="form-group">
                                     <label>Password</label>
@@ -38,112 +38,127 @@
 
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
-               <div class="container my-auto">
-                  <div class="copyright text-center my-auto">
-                     <span>Copyright &copy; Karpten (KRP) <?= date('Y') ?></span>
-                 </div>
-             </div>
-         </footer>
-         <!-- End of Footer -->
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; Karpten (KRP) <?= date('Y') ?></span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
 
-     </div>
-     <!-- End of Content Wrapper -->
+            </div>
+            <!-- End of Content Wrapper -->
 
- </div>
- <!-- End of Page Wrapper -->
+            </div>
+            <!-- End of Page Wrapper -->
 
- <!-- Scroll to Top Button-->
- <a class="scroll-to-top rounded" href="#page-top">
-   <i class="fas fa-angle-up"></i>
-</a>
+            <!-- Scroll to Top Button-->
+            <a class="scroll-to-top rounded" href="#page-top">
+                <i class="fas fa-angle-up"></i>
+            </a>
 
-<!-- Logout Modal-->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-aria-hidden="true">
-<div class="modal-dialog" role="document">
-   <div class="modal-content">
-      <div class="modal-header">
-         <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-         <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-        </button>
-    </div>
-    <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-    <div class="modal-footer">
-     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-     <a class="btn btn-primary" href="../logout.php">Logout</a>
- </div>
-</div>
-</div>
-</div>
+            <!-- Logout Modal-->
+            <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                            <a class="btn btn-primary" href="../logout.php">Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-<!-- Bootstrap core JavaScript-->
-<script src="../assets/vendor/jquery/jquery.min.js"></script>
-<script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+            <!-- Bootstrap core JavaScript-->
+            <script src="../assets/vendor/jquery/jquery.min.js"></script>
+            <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-<!-- Core plugin JavaScript-->
-<script src="../assets/vendor/jquery-easing/jquery.easing.min.js"></script>
+            <!-- Core plugin JavaScript-->
+            <script src="../assets/vendor/jquery-easing/jquery.easing.min.js"></script>
+            <script src="../assets/vendor/jquery/jquery.mask.min.js"></script>
+            <script src="../assets/vendor/select/select2.min.js"></script>
+            <script src="../assets/vendor/select/bootstrap-select.min.js"></script>
+            <script src="../assets/vendor/sweetalert2/sweetalert2.all.min.js"></script>
 
-<!-- Custom scripts for all pages-->
-<script src="../assets/js/sb-admin-2.min.js"></script>
+            <!-- Custom scripts for all pages-->
+            <script src="../assets/js/sb-admin-2.min.js"></script>
 
-<!-- Page level plugins -->
-<script src="../assets/vendor/datatables/jquery.dataTables.min.js"></script>
-<script src="../assets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-<script src="../assets/vendor/datatables/dataTables.buttons.min.js"></script>
-<script src="../assets/vendor/datatables/buttons.bootstrap4.min.js"></script>
-<script src="../assets/vendor/datatables/buttons.html5.min.js"></script>
-<script src="../assets/vendor/datatables/jszip.min.js"></script>
-<script src="../assets/vendor/datatables/buttons.print.min.js"></script>
-<script src="../assets/vendor/datatables/pdfmake.min.js"></script>
-<script src="../assets/vendor/datatables/vfs_fonts.js"></script>
-<script src="../assets/vendor/izitoast/js/iziToast.min.js"></script>
+            <!-- Page level plugins -->
+            <script src="../assets/vendor/datatables/jquery.dataTables.min.js"></script>
+            <script src="../assets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+            <script src="../assets/vendor/datatables/dataTables.buttons.min.js"></script>
+            <script src="../assets/vendor/datatables/buttons.bootstrap4.min.js"></script>
+            <script src="../assets/vendor/datatables/buttons.html5.min.js"></script>
+            <script src="../assets/vendor/datatables/jszip.min.js"></script>
+            <script src="../assets/vendor/datatables/buttons.print.min.js"></script>
+            <script src="../assets/vendor/datatables/pdfmake.min.js"></script>
+            <script src="../assets/vendor/datatables/vfs_fonts.js"></script>
+            <script src="../assets/vendor/izitoast/js/iziToast.min.js"></script>
 
-<script>
-    $(document).ready(function() {
-        $(document).tooltip({ selector: '[data-toggle1="tooltip"]' });
-        $('#dataTable').DataTable();
-        $('#dataTablelaporan').DataTable({
-            dom: 'Bfrtip',
-            buttons: [
-            {
-                extend: "copy",
-                className: "btn-sm btn-info"
-            },
-            {
-                extend: "csv",
-                className: "btn-sm btn-info"
-            },
-            {
-                extend: "excel",
-                className: "btn-sm btn-info"
-            },
-            {
-                extend: "pdfHtml5",
-                className: "btn-sm btn-info"
-            },
-            {
-                extend: "print",
-                className: "btn-sm btn-info"
-            },
-            ],
-            responsive: true,
-            searching: false,
-            // scrollY: false,
-            scrollCollapse: false,
-            paging: false,
-        });
+            <script>
+                $(document).ready(function() {
+                    $(document).tooltip({
+                        selector: '[data-toggle1="tooltip"]'
+                    });
+                    $('.select2').selectpicker();
+                    $('.uang').mask('000.000.000', {
+                        reverse: true
+                    });
 
-        <?php if (isset($msgedtakun)) { ?>
-            iziToast.success({
-                title: 'Berhasil Diproses',
-                message: '<?= $msgedtakun ?>',
-                position: 'topRight'
-            });
-            window.history.pushState('', '', location.href.split('?')[0]);
-        <?php } ?>
-    });
-</script>
+                    $('#dataTable').DataTable();
+                    $('#dataTablelaporan').DataTable({
+                        dom: 'Bfrtip',
+                        buttons: [{
+                                extend: "copy",
+                                className: "btn-sm btn-info",
+                                footer: true
+                            },
+                            {
+                                extend: "csv",
+                                className: "btn-sm btn-info",
+                                footer: true
+                            },
+                            {
+                                extend: "excel",
+                                className: "btn-sm btn-info",
+                                footer: true
+                            },
+                            {
+                                extend: "pdfHtml5",
+                                className: "btn-sm btn-info",
+                                footer: true
+                            },
+                            {
+                                extend: "print",
+                                className: "btn-sm btn-info",
+                                footer: true
+                            },
+                        ],
+                        responsive: true,
+                        searching: false,
+                        // scrollY: false,
+                        scrollCollapse: false,
+                        paging: false,
+                    });
 
-</body>
-</html>
+                    <?php if (isset($msgedtakun)) { ?>
+                        iziToast.success({
+                            title: 'Berhasil Diproses',
+                            message: '<?= $msgedtakun ?>',
+                            position: 'topRight'
+                        });
+                        window.history.pushState('', '', location.href.split('?')[0]);
+                    <?php } ?>
+                });
+            </script>
+
+            </body>
+
+            </html>

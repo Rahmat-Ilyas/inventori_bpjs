@@ -1,4 +1,4 @@
-<?php 
+<?php
 require('template/header.php');
 
 if (isset($_POST['submit_add'])) {
@@ -69,7 +69,8 @@ $results = mysqli_query($conn, "SELECT * FROM pegawai");
                         </tr>
                     </thead>
                     <tbody>
-                        <?php $no=1; foreach ($results as $res) { ?>
+                        <?php $no = 1;
+                        foreach ($results as $res) { ?>
                             <tr>
                                 <td><?= $no ?></td>
                                 <td>
@@ -85,7 +86,7 @@ $results = mysqli_query($conn, "SELECT * FROM pegawai");
                                     <button class="btn btn-sm btn-danger" data-toggle="modal" data-target=".modal-delete<?= $res['id'] ?>"><i class="fa fa-trash"></i> Hapus</button>
                                 </td>
                             </tr>
-                            <?php $no=$no+1; 
+                        <?php $no = $no + 1;
                         } ?>
                     </tbody>
                 </table>
@@ -109,7 +110,7 @@ $results = mysqli_query($conn, "SELECT * FROM pegawai");
                     <div class="form-group row">
                         <label class="col-md-4">NIP</label>
                         <div class="col-md-8">
-                            <input type="number" name="nip" required="required" class="form-control" id="cekNIP" placeholder="NIP..." autocomplete="off">
+                            <input type="text" name="nip" required="required" class="form-control" id="cekNIP" placeholder="NIP..." autocomplete="off">
                             <span class="text-danger" id="nipExits" hidden="" style="font-size: 13px;"><i>*NIP telah Terdaftar</i></span>
                         </div>
                     </div>
@@ -165,7 +166,7 @@ $results = mysqli_query($conn, "SELECT * FROM pegawai");
                         <div class="form-group row">
                             <label class="col-md-4">NIP</label>
                             <div class="col-md-8">
-                                <input type="number" name="nip" required="required" class="form-control" placeholder="NIP..." autocomplete="off" value="<?= $res['nip'] ?>" readonly>
+                                <input type="text" name="nip" required="required" class="form-control" placeholder="NIP..." autocomplete="off" value="<?= $res['nip'] ?>">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -195,7 +196,7 @@ $results = mysqli_query($conn, "SELECT * FROM pegawai");
                         <div class="form-group row">
                             <label class="col-md-4">Password</label>
                             <div class="col-md-8">
-                                <input type="text" name="password"  class="form-control" placeholder="Password..." autocomplete="off">
+                                <input type="text" name="password" class="form-control" placeholder="Password..." autocomplete="off">
                                 <span class="text-info" style="font-size: 13px;">Info: Masukkan password baru untuk mgupdate password</span>
                             </div>
                         </div>
@@ -235,7 +236,7 @@ $results = mysqli_query($conn, "SELECT * FROM pegawai");
     </div>
 <?php } ?>
 
-<?php 
+<?php
 require('template/footer.php');
 ?>
 
@@ -255,10 +256,13 @@ require('template/footer.php');
         $('#cekNIP').keyup(function(event) {
             var value = $(this).val();
             $.ajax({
-                url     : '../config.php',
-                method  : "POST",
-                data    : { cekNIP: true, value: value },
-                success : function(data) {
+                url: '../config.php',
+                method: "POST",
+                data: {
+                    cekNIP: true,
+                    value: value
+                },
+                success: function(data) {
                     if (data) {
                         $('#nipExits').removeAttr('hidden');
                         setTimeout(function() {

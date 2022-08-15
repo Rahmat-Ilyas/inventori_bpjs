@@ -1,4 +1,4 @@
-<?php 
+<?php
 require('template/header.php');
 
 if (isset($_POST['submit_add'])) {
@@ -66,14 +66,15 @@ $kategori = mysqli_query($conn, "SELECT * FROM kategori");
                         </tr>
                     </thead>
                     <tbody>
-                        <?php $no=1; foreach ($results as $res) {
+                        <?php $no = 1;
+                        foreach ($results as $res) {
                             $kat_id = $res['kategori_id'];
                             $get_kat = mysqli_query($conn, "SELECT * FROM kategori WHERE id='$kat_id'");
                             $kat = mysqli_fetch_assoc($get_kat);
-                            ?>
+                        ?>
                             <tr>
                                 <td><?= $no ?></td>
-                                <td>BR-<?= sprintf('%04s', $res['kategori_id']).'-'.sprintf('%04s', $res['id']) ?></td>
+                                <td>BR-<?= sprintf('%04s', $res['kategori_id']) . '-' . sprintf('%04s', $res['id']) ?></td>
                                 <td><?= $res['nama_barang'] ?></td>
                                 <td><?= $kat['nama_kategori'] ?></td>
                                 <td><?= $res['jumlah'] ?></td>
@@ -87,7 +88,7 @@ $kategori = mysqli_query($conn, "SELECT * FROM kategori");
                                     <button class="btn btn-sm btn-danger" data-toggle="modal" data-target=".modal-delete<?= $res['id'] ?>" data-toggle1="tooltip" data-original-title="Hapus Data"><i class="fa fa-trash"></i></button>
                                 </td>
                             </tr>
-                            <?php $no=$no+1; 
+                        <?php $no = $no + 1;
                         } ?>
                     </tbody>
                 </table>
@@ -149,11 +150,11 @@ $kategori = mysqli_query($conn, "SELECT * FROM kategori");
     </div>
 </div>
 
-<?php foreach ($results as $res) { 
+<?php foreach ($results as $res) {
     $brgid = $res['id'];
     $barang_masuk = mysqli_query($conn, "SELECT * FROM barang_masuk WHERE barang_id='$brgid'");
     $barang_keluar = mysqli_query($conn, "SELECT * FROM barang_keluar WHERE barang_id='$brgid' AND status='finish'");
-    ?>
+?>
     <!-- MODAL RIWAYAT -->
     <div class="modal modal-riwayat<?= $res['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
         <div class="modal-dialog modal-lg">
@@ -178,23 +179,27 @@ $kategori = mysqli_query($conn, "SELECT * FROM kategori");
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php $no=1; foreach ($barang_masuk as $bm) {
+                                <?php $no = 1;
+                                foreach ($barang_masuk as $bm) {
                                     $supid = $bm['supplier_id'];
                                     $get_supplier = mysqli_query($conn, "SELECT * FROM supplier WHERE id='$supid'");
                                     $spl = mysqli_fetch_assoc($get_supplier);
-                                    ?>
+                                ?>
                                     <tr>
                                         <td><?= $no ?></td>
                                         <td><?= date('d/d/Y', strtotime($bm['tanggal_masuk'])) ?></td>
-                                        <td><?= $bm['jumlah_masuk'].' '.$res['satuan'] ?></td>
+                                        <td><?= $bm['jumlah_masuk'] . ' ' . $res['satuan'] ?></td>
                                         <td>Rp.<?= $bm['harga'] ?></td>
-                                        <td>Rp.<?= $bm['harga']*$bm['jumlah_masuk'] ?></td>
-                                        <td><?= $spl['nama_supplier'] ?></td>
+                                        <td>Rp.<?= $bm['harga'] * $bm['jumlah_masuk'] ?></td>
+                                        <td><?= $spl ? $spl['nama_supplier'] : '-' ?></td>
                                         <td><?= $bm['keterangan'] ? $bm['keterangan'] : '-' ?></td>
                                     </tr>
-                                    <?php $no=$no+1; 
-                                } if ($no==1) { ?>
-                                    <tr><td colspan="7" class="text-center"><i>Tidak ada data ditemukan</i></td></tr>
+                                <?php $no = $no + 1;
+                                }
+                                if ($no == 1) { ?>
+                                    <tr>
+                                        <td colspan="7" class="text-center"><i>Tidak ada data ditemukan</i></td>
+                                    </tr>
                                 <?php } ?>
                             </tbody>
                         </table>
@@ -215,23 +220,27 @@ $kategori = mysqli_query($conn, "SELECT * FROM kategori");
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php $no=1; foreach ($barang_keluar as $bk) {
+                                <?php $no = 1;
+                                foreach ($barang_keluar as $bk) {
                                     $pgwid = $bk['pegawai_id'];
                                     $get_pegawai = mysqli_query($conn, "SELECT * FROM pegawai WHERE id='$pgwid'");
                                     $pgw = mysqli_fetch_assoc($get_pegawai);
-                                    ?>
+                                ?>
                                     <tr>
                                         <td><?= $no ?></td>
                                         <td><?= date('d/d/Y', strtotime($bk['tanggal_keluar'])) ?></td>
-                                        <td><?= $bk['jumlah_keluar'].' '.$res['satuan'] ?></td>
+                                        <td><?= $bk['jumlah_keluar'] . ' ' . $res['satuan'] ?></td>
                                         <td><?= $pgw['nama'] ?></td>
                                         <td><?= $pgw['nip'] ?></td>
                                         <td><?= $pgw['jabatan'] ?></td>
                                         <td><?= $bk['ket_request'] ? $bk['ket_request'] : '-' ?></td>
                                     </tr>
-                                    <?php $no=$no+1; 
-                                } if ($no==1) { ?>
-                                    <tr><td colspan="7" class="text-center"><i>Tidak ada data ditemukan</i></td></tr>
+                                <?php $no = $no + 1;
+                                }
+                                if ($no == 1) { ?>
+                                    <tr>
+                                        <td colspan="7" class="text-center"><i>Tidak ada data ditemukan</i></td>
+                                    </tr>
                                 <?php } ?>
                             </tbody>
                         </table>
@@ -268,7 +277,7 @@ $kategori = mysqli_query($conn, "SELECT * FROM kategori");
                             <div class="col-md-8">
                                 <select name="kategori_id" class="form-control" required="required">
                                     <?php foreach ($kategori as $kat) { ?>
-                                        <option value="<?= $kat['id'] ?>" <?php if($kat['id'] == $res['kategori_id']) echo 'selected'; ?>><?= $kat['nama_kategori'] ?></option>
+                                        <option value="<?= $kat['id'] ?>" <?php if ($kat['id'] == $res['kategori_id']) echo 'selected'; ?>><?= $kat['nama_kategori'] ?></option>
                                     <?php } ?>
                                 </select>
                             </div>
@@ -320,7 +329,7 @@ $kategori = mysqli_query($conn, "SELECT * FROM kategori");
     </div>
 <?php } ?>
 
-<?php 
+<?php
 require('template/footer.php');
 ?>
 

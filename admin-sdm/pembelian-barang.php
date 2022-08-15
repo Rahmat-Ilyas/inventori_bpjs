@@ -5,7 +5,7 @@ if (isset($_POST['submit_add'])) {
 	$barang_id = $_POST['barang_id'];
 	$supplier_id = $_POST['supplier_id'];
 	$jumlah_masuk = $_POST['jumlah_masuk'];
-	$harga = $_POST['harga'];
+	$harga = str_replace('.', '', $_POST['harga']);
 	$tanggal_masuk = $_POST['tanggal_masuk'];
 	$keterangan = $_POST['keterangan'];
 
@@ -150,7 +150,7 @@ $supplier = mysqli_query($conn, "SELECT * FROM supplier");
 					<div class="form-group row">
 						<label class="col-md-4">Barang</label>
 						<div class="col-md-8">
-							<select name="barang_id" class="form-control" id="chgBarang" required="required">
+							<select name="barang_id" class="form-control select2" data-live-search="true" id="chgBarang" required="required">
 								<option value="">.::Pilih Barang::.</option>
 								<?php foreach ($barang as $brg) { ?>
 									<option value="<?= $brg['id'] ?>"><?= $brg['nama_barang'] ?></option>
@@ -172,7 +172,12 @@ $supplier = mysqli_query($conn, "SELECT * FROM supplier");
 					<div class="form-group row">
 						<label class="col-md-4">Harga/<span class="satuan">Pcs</span></label>
 						<div class="col-md-8">
-							<input type="number" name="harga" required="required" class="form-control" placeholder="Harga..." autocomplete="off">
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<div class="input-group-text">RP.</div>
+								</div>
+								<input type="text" name="harga" required="required" class="form-control uang" placeholder="Harga..." autocomplete="off">
+							</div>
 						</div>
 					</div>
 					<div class="form-group row">
