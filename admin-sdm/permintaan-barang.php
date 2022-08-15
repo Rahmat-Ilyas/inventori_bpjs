@@ -357,12 +357,8 @@ foreach ($result2 as $res2) {
 				</div>
 				<div class="modal-body">
 					<img src="../assets/img/bukti/<?= $res2['bukti_pengambilan'] ?>" style="width: 100%;" alt="">
-
-					<div class="form-group row">
-						<div class="col-md-1"></div>
-						<div class="col-md-10 text-right">
-							<button class="btn btn-secondary" type="button" data-dismiss="modal" aria-hidden="true">Tutup</button>
-						</div>
+					<div class="mt-1 text-right">
+						<button class="btn btn-secondary" type="button" data-dismiss="modal" aria-hidden="true">Tutup</button>
 					</div>
 				</div>
 			</div>
