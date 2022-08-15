@@ -62,7 +62,7 @@ $kategori = mysqli_query($conn, "SELECT * FROM kategori");
                             <th>Satuan</th>
                             <th>Keterangan</th>
                             <th>Riwayat</th>
-                            <th>Aksi</th>
+                            <th width="60">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -189,8 +189,8 @@ $kategori = mysqli_query($conn, "SELECT * FROM kategori");
                                         <td><?= $no ?></td>
                                         <td><?= date('d/d/Y', strtotime($bm['tanggal_masuk'])) ?></td>
                                         <td><?= $bm['jumlah_masuk'] . ' ' . $res['satuan'] ?></td>
-                                        <td>Rp.<?= $bm['harga'] ?></td>
-                                        <td>Rp.<?= $bm['harga'] * $bm['jumlah_masuk'] ?></td>
+                                        <td>Rp.<?= number_format($bm['harga'], 2, ',', '.') ?></td>
+                                        <td>Rp.<?= number_format($bm['harga'] * $bm['jumlah_masuk'], 2, ',', '.') ?></td>
                                         <td><?= $spl ? $spl['nama_supplier'] : '-' ?></td>
                                         <td><?= $bm['keterangan'] ? $bm['keterangan'] : '-' ?></td>
                                     </tr>
