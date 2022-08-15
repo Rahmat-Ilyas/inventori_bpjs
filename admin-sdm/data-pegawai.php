@@ -21,10 +21,18 @@ if (isset($_POST['submit_edit'])) {
     $telepon = $_POST['telepon'];
     $jabatan = $_POST['jabatan'];
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-    if ($_POST['password'] == '') $query = "UPDATE pegawai SET nama='$nama', email='$email', telepon='$telepon', jabatan='$jabatan' WHERE id='$id'";
-    else $query = "UPDATE pegawai SET nama='$nama', email='$email', telepon='$telepon', jabatan='$jabatan', password='$password' WHERE id='$id'";
-    mysqli_query($conn, $query);
-    echo "<script>location.href='data-pegawai.php?proses=2'</script>";
+
+    $cek_nip = mysqli_query($conn, "SELECT nip FROM pegawai WHERE nip='$nip' AND id != '$id'");
+    $cek = mysqli_fetch_assoc($cek_nip);
+
+    if (!$cek) {
+        if ($_POST['password'] == '') $query = "UPDATE pegawai SET nip='$nip', nama='$nama', email='$email', telepon='$telepon', jabatan='$jabatan' WHERE id='$id'";
+        else $query = "UPDATE pegawai SET nip='$nip', nama='$nama', email='$email', telepon='$telepon', jabatan='$jabatan', password='$password' WHERE id='$id'";
+        mysqli_query($conn, $query);
+        echo "<script>location.href='data-pegawai.php?proses=2'</script>";
+    } else {
+        $err_nip = true;
+    }
 }
 
 if (isset($_POST['submit_delete'])) {
@@ -250,6 +258,15 @@ require('template/footer.php');
                 position: 'topRight'
             });
             window.history.pushState('', '', location.href.split('?')[0]);
+        <?php }
+        if (isset($err_nip)) { ?>
+            iziToast.error({
+                title: 'Gagal Diproses',
+                message: 'NIP telah terdaftar',
+                position: 'topRight'
+            });
+            window.history.pushState('', '', location.href.split('?')[0]);
+
         <?php } ?>
 
         // Cek NIP

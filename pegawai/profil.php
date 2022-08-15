@@ -1,24 +1,33 @@
-<?php 
+<?php
 require('template/header.php');
 
 if (isset($_POST['submit_edit'])) {
     $id = $pegawai_id;
+    $nip = $_POST['nip'];
     $nama = $_POST['nama'];
     $email = $_POST['email'];
     $telepon = $_POST['telepon'];
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-    if ($_POST['password'] == '') $query = "UPDATE pegawai SET nama='$nama', email='$email', telepon='$telepon' WHERE id='$id'";
-    else $query = "UPDATE pegawai SET nama='$nama', email='$email', telepon='$telepon', password='$password' WHERE id='$id'";
-    mysqli_query($conn, $query);
 
-    $foto = $_FILES['foto']['tmp_name'];
-    if ($foto) {
-        $nama_foto = 'foto-pegawai-'.sprintf('%04s', $id).'.jpg';
-        move_uploaded_file($foto, '../assets/img/pegawai/' . $nama_foto);
-        mysqli_query($conn, "UPDATE pegawai SET foto='$nama_foto' WHERE id='$id'");
+    $cek_nip = mysqli_query($conn, "SELECT nip FROM pegawai WHERE nip='$nip' AND id != '$id'");
+    $cek = mysqli_fetch_assoc($cek_nip);
+
+    if (!$cek) {
+        if ($_POST['password'] == '') $query = "UPDATE pegawai SET nip='$nip', nama='$nama', email='$email', telepon='$telepon' WHERE id='$id'";
+        else $query = "UPDATE pegawai SET nip='$nip', nama='$nama', email='$email', telepon='$telepon', password='$password' WHERE id='$id'";
+        mysqli_query($conn, $query);
+
+        $foto = $_FILES['foto']['tmp_name'];
+        if ($foto) {
+            $nama_foto = 'foto-pegawai-' . sprintf('%04s', $id) . '.jpg';
+            move_uploaded_file($foto, '../assets/img/pegawai/' . $nama_foto);
+            mysqli_query($conn, "UPDATE pegawai SET foto='$nama_foto' WHERE id='$id'");
+        }
+
+        echo "<script>location.href='profil.php?proses=1'</script>";
+    } else {
+        $err_nip = true;
     }
-
-    echo "<script>location.href='profil.php?proses=1'</script>";
 }
 
 $barang = mysqli_query($conn, "SELECT * FROM barang");
@@ -43,23 +52,28 @@ $barang = mysqli_query($conn, "SELECT * FROM barang");
                                 </td>
                             </tr>
                             <tr>
-                                <td width="200">NIP</td><td width="1">:</td>
+                                <td width="200">NIP</td>
+                                <td width="1">:</td>
                                 <td><?= $user['nip'] ?></td>
                             </tr>
                             <tr>
-                                <td width="200">Nama Lengkap</td><td width="1">:</td>
+                                <td width="200">Nama Lengkap</td>
+                                <td width="1">:</td>
                                 <td><?= $user['nama'] ?></td>
                             </tr>
                             <tr>
-                                <td width="200">Email</td><td width="1">:</td>
+                                <td width="200">Email</td>
+                                <td width="1">:</td>
                                 <td><?= $user['email'] ?></td>
                             </tr>
                             <tr>
-                                <td width="200">Telepon</td><td width="1">:</td>
+                                <td width="200">Telepon</td>
+                                <td width="1">:</td>
                                 <td><?= $user['telepon'] ?></td>
                             </tr>
                             <tr>
-                                <td width="200">Jabatan</td><td width="1">:</td>
+                                <td width="200">Jabatan</td>
+                                <td width="1">:</td>
                                 <td><?= $user['jabatan'] ?></td>
                             </tr>
                         </tbody>
@@ -83,25 +97,25 @@ $barang = mysqli_query($conn, "SELECT * FROM barang");
                                     <input type="file" name="foto" id="btn-foto" style="display: none;">
                                 </div>
                             </div>
-                        </div> 
+                        </div>
                         <div class="form-group row">
                             <label class="col-md-3">NIP</label>
                             <div class="col-md-9">
-                                <input type="number" name="nama" class="form-control" placeholder="NIP..." required="" value="<?= $user['nip'] ?>" readonly>
+                                <input type="text" name="nip" class="form-control" placeholder="NIP..." required="" value="<?= $user['nip'] ?>">
                             </div>
-                        </div> 
+                        </div>
                         <div class="form-group row">
                             <label class="col-md-3">Nama Lengkap</label>
                             <div class="col-md-9">
                                 <input type="text" name="nama" class="form-control" placeholder="Nama Lengkap..." required="" value="<?= $user['nama'] ?>" autocomplete="off">
                             </div>
-                        </div> 
+                        </div>
                         <div class="form-group row">
                             <label class="col-md-3">Email</label>
                             <div class="col-md-9">
                                 <input type="email" name="email" class="form-control" placeholder="Email..." required="" value="<?= $user['email'] ?>" autocomplete="off">
                             </div>
-                        </div> 
+                        </div>
                         <div class="form-group row">
                             <label class="col-md-3">Telepon</label>
                             <div class="col-md-9">
@@ -130,7 +144,7 @@ $barang = mysqli_query($conn, "SELECT * FROM barang");
 </div>
 <!-- /.container-fluid -->
 
-<?php 
+<?php
 require('template/footer.php');
 ?>
 
@@ -185,6 +199,15 @@ require('template/footer.php');
                 });
                 window.history.pushState('', '', location.href.split('?')[0]);
             <?php }
-        } ?>
+        }
+        if (isset($err_nip)) { ?>
+            iziToast.error({
+                title: 'Gagal Diproses',
+                message: 'NIP telah terdaftar',
+                position: 'topRight'
+            });
+            window.history.pushState('', '', location.href.split('?')[0]);
+        <?php }
+        ?>
     });
 </script>
