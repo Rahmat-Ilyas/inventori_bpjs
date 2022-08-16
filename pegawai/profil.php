@@ -125,7 +125,7 @@ $barang = mysqli_query($conn, "SELECT * FROM barang");
                         <div class="form-group row">
                             <label class="col-md-3">Password</label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" name="password" autocomplete="off" placeholder="Password">
+                                <input type="password" class="form-control" name="password" autocomplete="off" placeholder="Password">
                                 <span class="text-info text-sm">Note: Masukkan password baru untuk mengganti password!</span>
                             </div>
                         </div>

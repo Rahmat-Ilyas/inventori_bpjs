@@ -144,7 +144,7 @@ $results = mysqli_query($conn, "SELECT * FROM pegawai");
                         <label class="col-md-4">Jabatan</label>
                         <div class="col-md-8">
                             <input type="text" name="jabatan" required="required" class="form-control" placeholder="Jabatan..." autocomplete="off">
-                            <span class="text-info" style="font-size: 13px;">Info: Password login sesuai dengan NIP masing-masing</span>
+                            <span class="text-info" style="font-size: 13px;">Info: Password login defalut sesuai dengan NIP masing-masing</span>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -204,7 +204,7 @@ $results = mysqli_query($conn, "SELECT * FROM pegawai");
                         <div class="form-group row">
                             <label class="col-md-4">Password</label>
                             <div class="col-md-8">
-                                <input type="text" name="password" class="form-control" placeholder="Password..." autocomplete="off">
+                                <input type="password" name="password" class="form-control" placeholder="Password..." autocomplete="off">
                                 <span class="text-info" style="font-size: 13px;">Info: Masukkan password baru untuk mgupdate password</span>
                             </div>
                         </div>

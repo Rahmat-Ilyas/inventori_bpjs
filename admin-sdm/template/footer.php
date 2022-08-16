@@ -23,7 +23,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Password</label>
-                                    <input type="text" class="form-control" name="password" autocomplete="off" placeholder="Password">
+                                    <input type="password" class="form-control" name="password" autocomplete="off" placeholder="Password">
                                     <span class="text-info text-sm">Note: Masukkan password baru untuk mengganti password!</span>
                                 </div>
                             </div>
