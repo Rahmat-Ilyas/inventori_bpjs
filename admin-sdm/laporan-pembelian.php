@@ -134,10 +134,11 @@ function get_data($laporan, $waktu)
                             <th></th>
                             <th class="text-center">Jumlah</th>
                             <th></th>
+                            <th></th>
                             <th><?= $tot_jmlh ?> Item</th>
                             <th>RP. <?= number_format($jmlh_satuan, 2, ',', '.') ?></th>
                             <th>RP. <?= number_format($jmlh_total, 2, ',', '.') ?></th>
-                            <th colspan="3"></th>
+                            <th colspan="2"></th>
                         </tr>
                     </tfoot>
                 </table>

@@ -107,6 +107,9 @@ function get_data($laporan, $waktu)
                     </thead>
                     <tbody>
                         <?php $no = 1;
+                        $tot_jmlh = 0;
+                        $jmlh_satuan = 0;
+                        $jmlh_total = 0;
                         foreach ($results as $res) { ?>
                             <tr>
                                 <td><?= $no ?></td>
@@ -119,9 +122,25 @@ function get_data($laporan, $waktu)
                                 <td><?= $res['nama_supplier'] ?></td>
                                 <td><?= $res['keterangan'] ? $res['keterangan'] : '-' ?></td>
                             </tr>
-                        <?php $no = $no + 1;
+                        <?php
+                            $no = $no + 1;
+                            $tot_jmlh += $res['jumlah_masuk'];
+                            $jmlh_satuan += $res['harga'];
+                            $jmlh_total += $res['harga'] * $res['jumlah_masuk'];
                         } ?>
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <th></th>
+                            <th class="text-center">Jumlah</th>
+                            <th></th>
+                            <th></th>
+                            <th><?= $tot_jmlh ?> Item</th>
+                            <th>RP. <?= number_format($jmlh_satuan, 2, ',', '.') ?></th>
+                            <th>RP. <?= number_format($jmlh_total, 2, ',', '.') ?></th>
+                            <th colspan="2"></th>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
         </div>
