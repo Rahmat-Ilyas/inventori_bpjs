@@ -194,6 +194,7 @@ $supplier = mysqli_query($conn, "SELECT * FROM supplier");
 								<?php foreach ($supplier as $spl) { ?>
 									<option value="<?= $spl['id'] ?>"><?= $spl['nama_supplier'] ?></option>
 								<?php } ?>
+								<option value="0">Tidak ada</option>
 							</select>
 						</div>
 					</div>
