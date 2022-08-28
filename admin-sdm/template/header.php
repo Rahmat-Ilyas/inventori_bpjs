@@ -121,7 +121,7 @@ $cntbreq = mysqli_num_rows($cntbrgreq);
             </li>
 
             <!-- Nav Item - Charts -->
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a href="barang-habis.php" class="nav-link" id="barang-habis">
                     <i class="fas fa-fw fa-archive"></i>
                     <span>Laporan Barang Habis
@@ -132,7 +132,7 @@ $cntbreq = mysqli_num_rows($cntbrgreq);
                         <?php } ?>
                     </span>
                 </a>
-            </li>
+            </li> -->
 
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">

@@ -116,12 +116,12 @@ $cntbrkl = mysqli_num_rows($cntbrgkleuar);
                 </a>
             </li>
 
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a href="barang-habis.php" class="nav-link collapsed" id="barang-habis">
                     <i class="fas fa-fw fa-archive"></i>
                     <span>Lapor Barang Habis</span>
                 </a>
-            </li>
+            </li> -->
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
