@@ -102,7 +102,7 @@ if (isset($_POST['login'])) {
                                                 <div class="text-danger" style="font-size: 13px;">Password tidak sesuai</div>
                                             <?php } ?>
                                         </div>
-                                        <button type="submit" class="btn btn-primary btn-user btn-block" name="login">Login</button>
+                                        <button type="submit" class="btn btn-success btn-user btn-block" name="login">Login</button>
                                     </form>
                                 </div>
                             </div>
